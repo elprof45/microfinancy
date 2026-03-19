@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 enum RoleUtilisateur {
@@ -127,10 +127,10 @@ model Utilisateur {
   updatedAt DateTime @updatedAt
 
   societe Societe? @relation("SocieteUtilisateurs", fields: [societeId], references: [id])
-  agence  Agence?  @relation(fields: [agenceId], references: [id])
+  agence  Agence?  @relation(fields: [agenceId], references: [id], map: "Utilisateur_agenceId_fkey")
 
-  agenceCaissier    Agence?            @relation("AgenceCaissiers", fields: [agenceId], references: [id])
-  agenceCollecteur  Agence?            @relation("AgenceCollecteurs", fields: [agenceId], references: [id])
+  agenceCaissier    Agence?            @relation("AgenceCaissiers", fields: [agenceId], references: [id], map: "Utilisateur_agenceId_caissier_fkey")
+  agenceCollecteur  Agence?            @relation("AgenceCollecteurs", fields: [agenceId], references: [id], map: "Utilisateur_agenceId_collecteur_fkey")
   caissierEtats     EtatCaisse[]       @relation("CaissierEtats")
   mouvements        MouvementItem[]
   createdMouvements MouvementEpargne[] @relation("CreatedBy")
