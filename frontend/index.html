@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microfinancy Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 text-slate-900">
+  <div class="min-h-screen">
+    <header class="bg-slate-900 text-white p-8 shadow">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-semibold mb-3">Microfinancy Dashboard</h1>
+        <p class="text-slate-300 max-w-2xl">Pages de gestion pour sociétés, agences, utilisateurs, clients totine, cotisations, comptes, mouvements et plus. Utilise Tailwind CSS + Alpine.js et consomme l’API REST existante.</p>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-8">
+      <section class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <a href="societes.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Sociétés</h2>
+          <p class="text-slate-600">Gérer les sociétés, créer, modifier et supprimer des structures.</p>
+        </a>
+        <a href="agences.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Agences</h2>
+          <p class="text-slate-600">CRUD agences et liaison avec les sociétés et utilisateurs.</p>
+        </a>
+        <a href="users.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Utilisateurs</h2>
+          <p class="text-slate-600">Créer et gérer les comptes d’utilisateurs avec rôles.</p>
+        </a>
+        <a href="client-totines.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Clients Totine</h2>
+          <p class="text-slate-600">Gestion des clients Totine, liste et profil client.</p>
+        </a>
+        <a href="carnets.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Carnets</h2>
+          <p class="text-slate-600">Gestion des carnets de collecte des clients.</p>
+        </a>
+        <a href="cotisations.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Cotisations</h2>
+          <p class="text-slate-600">Créer et gérer les cotisations mensuelles.</p>
+        </a>
+        <a href="comptes.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Comptes</h2>
+          <p class="text-slate-600">Gestion des comptes bancaires et soldes disponibles.</p>
+        </a>
+        <a href="mouvement-epargnes.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Mouvements Épargne</h2>
+          <p class="text-slate-600">Suivi des mouvements d’épargne avec stats et historique.</p>
+        </a>
+        <a href="mouvement-items.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Mouvements Items</h2>
+          <p class="text-slate-600">Gérer les mouvements divers du système.</p>
+        </a>
+        <a href="client-soldes.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Soldes Clients</h2>
+          <p class="text-slate-600">Contrôle des soldes clients et historiques.</p>
+        </a>
+        <a href="mouvement-totines.html" class="group block rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <h2 class="text-xl font-semibold mb-3">Mouvements Totine</h2>
+          <p class="text-slate-600">Gestion des totines, montants et documents de collecte.</p>
+        </a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

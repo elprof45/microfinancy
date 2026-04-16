@@ -1,0 +1,396 @@
+# --- SOCIETIES ---
+
+### Read Societies
+GET http://localhost:3000/societies
+
+### Read Society by ID
+GET http://localhost:3000/societies/2
+
+### Society Stats
+GET http://localhost:3000/societies/2/stats
+
+### Create Society
+POST http://localhost:3000/societies
+Content-Type: application/json
+
+{
+    "nom": "COECEPT",
+    "raisonSociale": "Microphina Finance COECEPT",
+    "identifiant": "MF-002",
+    "email": "contactcoecept@microphina.com",
+    "telephone": "+22890000000",
+    "adresse": "Lomé, Togo"
+}
+
+### Update Society
+PUT http://localhost:3000/societies/2
+Content-Type: application/json
+
+{
+    "nom": "COECEPT TOGO"
+}
+
+### Delete Society
+DELETE http://localhost:3000/societies/1
+
+
+# --- AGENCES ---
+
+### Read Agences
+GET http://localhost:3000/agences
+
+### Read Agence by ID
+GET http://localhost:3000/agences/1
+
+### Agence Stats
+GET http://localhost:3000/agences/1/stats
+
+### Create Agence
+POST http://localhost:3000/agences
+Content-Type: application/json
+
+{
+    "code": "AG-ATAKPAME-01",
+    "nom": "Agence Atakpame",
+    "adresse": "Atakpame, Togo",
+    "telephone": "+22890000000",
+    "societeId": 2
+}
+
+### Update Agence
+PUT http://localhost:3000/agences/1
+Content-Type: application/json
+
+{
+    "nom": "Agence Dakar Plateau - Rénovée"
+}
+
+### Delete Agence
+DELETE http://localhost:3000/agences/1
+
+
+# --- USERS ---
+
+### Read Users
+GET http://localhost:3000/users
+
+### Read User by ID
+GET http://localhost:3000/users/1
+
+### User Stats
+GET http://localhost:3000/users/1/stats
+
+### Create User
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "nom": "Koffi KODJO",
+    "email": "koffikodjo@ag.com",
+    "motDePasseHash": "123456",
+    "telephone": "+22890909090",
+    "role": "ADMIN",
+    "societeId": 2,
+    "agenceId": 2
+}
+
+### Update User
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+    "nom": "John Doe Updated",
+    "role": "CAISSIER"
+}
+
+### Delete User
+DELETE http://localhost:3000/users/2
+
+
+# --- CLIENT TOTINES ---
+
+### Read Client Totines
+GET http://localhost:3000/client-totines
+
+### Read Client Totine by ID
+GET http://localhost:3000/client-totines/1
+
+### Create Client Totine
+POST http://localhost:3000/client-totines
+Content-Type: application/json
+
+{
+    "numeroClient": "CL-0001",
+    "nom": "Amina TCHAGNA",
+    "telephone": "+22890011111",
+    "email": "amina.tchagna@example.com",
+    "agentCollecteurId": 2,
+    "agenceId": 2
+}
+
+### Update Client Totine
+PUT http://localhost:3000/client-totines/1
+Content-Type: application/json
+
+{
+    "nom": "Amina TCHAGNA UPDATED",
+    "telephone": "+22890022222"
+}
+
+### Delete Client Totine
+DELETE http://localhost:3000/client-totines/1
+
+
+# --- CARNETS ---
+
+### Read Carnets
+GET http://localhost:3000/carnets
+
+### Read Carnet by ID
+GET http://localhost:3000/carnets/1
+
+### Create Carnet
+POST http://localhost:3000/carnets
+Content-Type: application/json
+
+{
+    "numeroCarnet": "CN-0001",
+    "agentCollecteurId": 2,
+    "clientTotineId": 1
+}
+
+### Update Carnet
+PUT http://localhost:3000/carnets/1
+Content-Type: application/json
+
+{
+    "numeroCarnet": "CN-0001-UPDATED"
+}
+
+### Delete Carnet
+DELETE http://localhost:3000/carnets/1
+
+
+# --- COTISATIONS ---
+
+### Read Cotisations
+GET http://localhost:3000/cotisations
+
+### Read Cotisation by ID
+GET http://localhost:3000/cotisations/1
+
+### Create Cotisation
+POST http://localhost:3000/cotisations
+Content-Type: application/json
+
+{
+    "mois": "JANVIER",
+    "annee": 2026,
+    "mise": 50000,
+    "soldeDisponible": 50000,
+    "clientId": 1,
+    "carnetId": 1,
+    "agenceId": 2,
+    "agentCollecteurId": 2
+}
+
+### Update Cotisation
+PUT http://localhost:3000/cotisations/1
+Content-Type: application/json
+
+{
+    "mise": 55000,
+    "soldeDisponible": 55000
+}
+
+### Delete Cotisation
+DELETE http://localhost:3000/cotisations/1
+
+
+# --- MOUVEMENT TOTINES ---
+
+### Read Mouvement Totines
+GET http://localhost:3000/mouvement-totines
+
+### Read Mouvement Totine by ID
+GET http://localhost:3000/mouvement-totines/1
+
+### Create Mouvement Totine
+POST http://localhost:3000/mouvement-totines
+Content-Type: application/json
+
+{
+    "jour": 12,
+    "montant": 25000,
+    "carnetId": 1,
+    "agenceId": 2,
+    "utilisateurId": 2,
+    "clientTotineId": 1
+}
+
+### Update Mouvement Totine
+PUT http://localhost:3000/mouvement-totines/1
+Content-Type: application/json
+
+{
+    "montant": 30000
+}
+
+### Delete Mouvement Totine
+DELETE http://localhost:3000/mouvement-totines/1
+
+
+# --- CLIENT SOLDES ---
+
+### Read Client Soldes
+GET http://localhost:3000/client-soldes
+
+### Read Client Solde by ID
+GET http://localhost:3000/client-soldes/1
+
+### Create Client Solde
+POST http://localhost:3000/client-soldes
+Content-Type: application/json
+
+{
+    "clientId": 1,
+    "soldeTotal": 75000,
+    "agenceId": 2,
+    "agentCollecteurId": 2
+}
+
+### Update Client Solde
+PUT http://localhost:3000/client-soldes/1
+Content-Type: application/json
+
+{
+    "soldeTotal": 80000
+}
+
+### Delete Client Solde
+DELETE http://localhost:3000/client-soldes/1
+
+
+# --- COMPTES ---
+
+### Read Comptes
+GET http://localhost:3000/comptes
+
+### Read Compte by ID
+GET http://localhost:3000/comptes/1
+
+### Compte Stats
+GET http://localhost:3000/comptes/1/stats
+
+### Compte History
+GET http://localhost:3000/comptes/1/history
+
+### Create Compte
+POST http://localhost:3000/comptes
+Content-Type: application/json
+
+{
+    "numeroCompte": "CP-0001",
+    "typeCompte": "EPARGNE",
+    "solde": 100000,
+    "soldeDisponible": 100000,
+    "deviseId": "XOF",
+    "clientId": 1,
+    "agenceId": 2
+}
+
+### Update Compte
+PUT http://localhost:3000/comptes/1
+Content-Type: application/json
+
+{
+    "soldeDisponible": 95000
+}
+
+### Delete Compte
+DELETE http://localhost:3000/comptes/1
+
+
+# --- MOUVEMENT EPARGNES ---
+
+### Read Mouvement Epargnes
+GET http://localhost:3000/mouvement-epargnes
+
+### Read Mouvement Epargne by ID
+GET http://localhost:3000/mouvement-epargnes/1
+
+### Mouvement Epargne Stats
+GET http://localhost:3000/mouvement-epargnes/1/stats
+
+### Mouvement Epargne History
+GET http://localhost:3000/mouvement-epargnes/1/history
+
+### Create Mouvement Epargne
+POST http://localhost:3000/mouvement-epargnes
+Content-Type: application/json
+
+{
+    "reference": "ME-0001",
+    "type": "VERSEMENT",
+    "montant": 25000,
+    "soldeAvant": 100000,
+    "soldeApres": 125000,
+    "dateMouvement": "2026-01-12T10:00:00.000Z",
+    "statut": "VALIDE",
+    "observations": "Versement épargne client",
+    "agenceId": 2,
+    "clientId": 1,
+    "compteId": 1,
+    "creeParId": 2
+}
+
+### Update Mouvement Epargne
+PUT http://localhost:3000/mouvement-epargnes/1
+Content-Type: application/json
+
+{
+    "observations": "Versement validé"
+}
+
+### Delete Mouvement Epargne
+DELETE http://localhost:3000/mouvement-epargnes/1
+
+
+# --- MOUVEMENT ITEMS ---
+
+### Read Mouvement Items
+GET http://localhost:3000/mouvement-items
+
+### Read Mouvement Item by ID
+GET http://localhost:3000/mouvement-items/1
+
+### Mouvement Item Stats
+GET http://localhost:3000/mouvement-items/1/stats
+
+### Mouvement Item History
+GET http://localhost:3000/mouvement-items/1/history
+
+### Create Mouvement Item
+POST http://localhost:3000/mouvement-items
+Content-Type: application/json
+
+{
+    "reference": "MI-0001",
+    "type": "DEPOT",
+    "montant": 15000,
+    "date": "2026-01-12T11:00:00.000Z",
+    "compteId": 1,
+    "caissierId": 2,
+    "statut": "VALIDE"
+}
+
+### Update Mouvement Item
+PUT http://localhost:3000/mouvement-items/1
+Content-Type: application/json
+
+{
+    "montant": 20000
+}
+
+### Delete Mouvement Item
+DELETE http://localhost:3000/mouvement-items/1

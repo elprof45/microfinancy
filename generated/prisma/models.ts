@@ -8,4 +8,15 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Societe.js'
+export type * from './models/Agence.js'
+export type * from './models/Utilisateur.js'
+export type * from './models/Compte.js'
+export type * from './models/MouvementEpargne.js'
+export type * from './models/MouvementItem.js'
+export type * from './models/ClientTotine.js'
+export type * from './models/Carnet.js'
+export type * from './models/Cotisation.js'
+export type * from './models/MouvementTotine.js'
+export type * from './models/ClientSolde.js'
 export type * from './commonInputTypes.js'

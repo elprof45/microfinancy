@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Cotisations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="shared.js" defer></script>
+</head>
+<body class="bg-slate-100 text-slate-900">
+  <div class="min-h-screen">
+    <header class="bg-slate-800 text-white p-6 shadow">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-semibold">Gestion des Cotisations</h1>
+          <p class="text-slate-200">CRUD cotisations avec les infos client et carnet.</p>
+        </div>
+        <nav class="flex flex-wrap gap-3">
+          <a href="index.html" class="px-4 py-2 bg-slate-700 rounded hover:bg-slate-600">Accueil</a>
+          <a href="client-totines.html" class="px-4 py-2 bg-slate-700 rounded hover:bg-slate-600">Clients</a>
+          <a href="carnets.html" class="px-4 py-2 bg-slate-700 rounded hover:bg-slate-600">Carnets</a>
+          <a href="mouvement-epargnes.html" class="px-4 py-2 bg-slate-700 rounded hover:bg-slate-600">Epargnes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6" x-data="entityManager('cotisations', { mois: 'JANVIER', annee: 2026, mise: '', soldeDisponible: '', clientId: '', carnetId: '', agenceId: '', agentCollecteurId: '' }, ['id', 'mois', 'annee', 'mise', 'clientId', 'carnetId'])" x-init="loadList()">
+      <section class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Liste des cotisations</h2>
+            <template x-if="error">
+              <div class="mb-4 rounded border border-red-300 bg-red-50 p-4 text-red-700">{{ error }}</div>
+            </template>
+            <template x-if="message">
+              <div class="mb-4 rounded border border-emerald-300 bg-emerald-50 p-4 text-emerald-700">{{ message }}</div>
+            </template>
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-left text-sm">
+                <thead class="bg-slate-100 text-slate-600 uppercase text-xs tracking-wider">
+                  <tr>
+                    <th class="px-4 py-3">ID</th>
+                    <th class="px-4 py-3">Mois</th>
+                    <th class="px-4 py-3">Année</th>
+                    <th class="px-4 py-3">Mise</th>
+                    <th class="px-4 py-3">Client</th>
+                    <th class="px-4 py-3">Carnet</th>
+                    <th class="px-4 py-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  <template x-for="item in items" :key="item.id">
+                    <tr class="hover:bg-slate-50">
+                      <td class="px-4 py-3">{{ item.id }}</td>
+                      <td class="px-4 py-3">{{ item.mois }}</td>
+                      <td class="px-4 py-3">{{ item.annee }}</td>
+                      <td class="px-4 py-3">{{ item.mise }}</td>
+                      <td class="px-4 py-3">{{ item.clientId }}</td>
+                      <td class="px-4 py-3">{{ item.carnetId }}</td>
+                      <td class="px-4 py-3 space-x-2">
+                        <button @click="selectItem(item)" class="rounded bg-slate-700 px-3 py-1 text-white hover:bg-slate-600">Edit</button>
+                        <button @click="deleteItem(item.id)" class="rounded bg-rose-600 px-3 py-1 text-white hover:bg-rose-500">Suppr</button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Détail sélectionné</h2>
+            <template x-if="selected">
+              <div>
+                <pre class="overflow-auto rounded bg-slate-100 p-3 text-xs text-slate-700">{{ JSON.stringify(selected, null, 2) }}</pre>
+              </div>
+            </template>
+            <template x-if="!selected">
+              <p class="text-slate-500">Sélectionnez une cotisation pour voir les détails.</p>
+            </template>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-xl font-semibold mb-4">Formulaire cotisation</h2>
+            <div class="grid gap-4">
+              <label class="space-y-2 text-sm">
+                <span>Mois</span>
+                <select x-model="form.mois" class="w-full rounded border border-slate-300 px-3 py-2">
+                  <option>JANVIER</option>
+                  <option>FEVRIER</option>
+                  <option>MARS</option>
+                  <option>AVRIL</option>
+                  <option>MAI</option>
+                  <option>JUIN</option>
+                  <option>JUILLET</option>
+                  <option>AOUT</option>
+                  <option>SEPTEMBRE</option>
+                  <option>OCTOBRE</option>
+                  <option>NOVEMBRE</option>
+                  <option>DECEMBRE</option>
+                </select>
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>Année</span>
+                <input x-model="form.annee" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>Mise</span>
+                <input x-model="form.mise" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>Solde disponible</span>
+                <input x-model="form.soldeDisponible" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>ID Client</span>
+                <input x-model="form.clientId" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>ID Carnet</span>
+                <input x-model="form.carnetId" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>ID Agence</span>
+                <input x-model="form.agenceId" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+              <label class="space-y-2 text-sm">
+                <span>ID Collecteur</span>
+                <input x-model="form.agentCollecteurId" type="number" class="w-full rounded border border-slate-300 px-3 py-2" />
+              </label>
+            </div>
+            <div class="mt-5 flex flex-wrap gap-3">
+              <button @click="createItem()" class="rounded bg-slate-800 px-5 py-2 text-white hover:bg-slate-700">Créer</button>
+              <button @click="updateItem()" class="rounded bg-emerald-600 px-5 py-2 text-white hover:bg-emerald-500">Mettre à jour</button>
+              <button @click="clearSelection()" class="rounded border border-slate-300 px-5 py-2 text-slate-700 hover:bg-slate-50">Réinitialiser</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

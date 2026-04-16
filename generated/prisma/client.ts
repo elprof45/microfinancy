@@ -31,8 +31,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Societes
+ * const societes = await prisma.societe.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -41,4 +41,58 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
-
+/**
+ * Model Societe
+ * 
+ */
+export type Societe = Prisma.SocieteModel
+/**
+ * Model Agence
+ * 
+ */
+export type Agence = Prisma.AgenceModel
+/**
+ * Model Utilisateur
+ * 
+ */
+export type Utilisateur = Prisma.UtilisateurModel
+/**
+ * Model Compte
+ * 
+ */
+export type Compte = Prisma.CompteModel
+/**
+ * Model MouvementEpargne
+ * 
+ */
+export type MouvementEpargne = Prisma.MouvementEpargneModel
+/**
+ * Model MouvementItem
+ * 
+ */
+export type MouvementItem = Prisma.MouvementItemModel
+/**
+ * Model ClientTotine
+ * 
+ */
+export type ClientTotine = Prisma.ClientTotineModel
+/**
+ * Model Carnet
+ * 
+ */
+export type Carnet = Prisma.CarnetModel
+/**
+ * Model Cotisation
+ * 
+ */
+export type Cotisation = Prisma.CotisationModel
+/**
+ * Model MouvementTotine
+ * 
+ */
+export type MouvementTotine = Prisma.MouvementTotineModel
+/**
+ * Model ClientSolde
+ * 
+ */
+export type ClientSolde = Prisma.ClientSoldeModel

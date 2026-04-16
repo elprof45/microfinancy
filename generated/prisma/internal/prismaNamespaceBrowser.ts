@@ -51,7 +51,17 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  Societe: 'Societe',
+  Agence: 'Agence',
+  Utilisateur: 'Utilisateur',
+  Compte: 'Compte',
+  MouvementEpargne: 'MouvementEpargne',
+  MouvementItem: 'MouvementItem',
+  ClientTotine: 'ClientTotine',
+  Carnet: 'Carnet',
+  Cotisation: 'Cotisation',
+  MouvementTotine: 'MouvementTotine',
+  ClientSolde: 'ClientSolde'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -61,8 +71,220 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const SocieteScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  raisonSociale: 'raisonSociale',
+  identifiant: 'identifiant',
+  email: 'email',
+  telephone: 'telephone',
+  adresse: 'adresse',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SocieteScalarFieldEnum = (typeof SocieteScalarFieldEnum)[keyof typeof SocieteScalarFieldEnum]
+
+
+export const AgenceScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  nom: 'nom',
+  adresse: 'adresse',
+  telephone: 'telephone',
+  zoneId: 'zoneId',
+  societeId: 'societeId',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AgenceScalarFieldEnum = (typeof AgenceScalarFieldEnum)[keyof typeof AgenceScalarFieldEnum]
+
+
+export const UtilisateurScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  motDePasseHash: 'motDePasseHash',
+  nom: 'nom',
+  telephone: 'telephone',
+  role: 'role',
+  societeId: 'societeId',
+  agenceId: 'agenceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UtilisateurScalarFieldEnum = (typeof UtilisateurScalarFieldEnum)[keyof typeof UtilisateurScalarFieldEnum]
+
+
+export const CompteScalarFieldEnum = {
+  id: 'id',
+  numeroCompte: 'numeroCompte',
+  typeCompte: 'typeCompte',
+  solde: 'solde',
+  soldeDisponible: 'soldeDisponible',
+  dateOuverture: 'dateOuverture',
+  dateCloture: 'dateCloture',
+  clientId: 'clientId',
+  agenceId: 'agenceId',
+  deviseId: 'deviseId',
+  isActif: 'isActif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompteScalarFieldEnum = (typeof CompteScalarFieldEnum)[keyof typeof CompteScalarFieldEnum]
+
+
+export const MouvementEpargneScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  type: 'type',
+  montant: 'montant',
+  soldeAvant: 'soldeAvant',
+  soldeApres: 'soldeApres',
+  dateMouvement: 'dateMouvement',
+  statut: 'statut',
+  observations: 'observations',
+  agenceId: 'agenceId',
+  clientId: 'clientId',
+  compteId: 'compteId',
+  creeParId: 'creeParId',
+  valideParId: 'valideParId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  cotisationId: 'cotisationId',
+  mouvementTotineId: 'mouvementTotineId'
+} as const
+
+export type MouvementEpargneScalarFieldEnum = (typeof MouvementEpargneScalarFieldEnum)[keyof typeof MouvementEpargneScalarFieldEnum]
+
+
+export const MouvementItemScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  type: 'type',
+  montant: 'montant',
+  date: 'date',
+  compteId: 'compteId',
+  caissierId: 'caissierId',
+  statut: 'statut',
+  createdAt: 'createdAt',
+  cotisationId: 'cotisationId',
+  mouvementTotineId: 'mouvementTotineId'
+} as const
+
+export type MouvementItemScalarFieldEnum = (typeof MouvementItemScalarFieldEnum)[keyof typeof MouvementItemScalarFieldEnum]
+
+
+export const ClientTotineScalarFieldEnum = {
+  id: 'id',
+  numeroClient: 'numeroClient',
+  nom: 'nom',
+  telephone: 'telephone',
+  email: 'email',
+  agentCollecteurId: 'agentCollecteurId',
+  agenceId: 'agenceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClientTotineScalarFieldEnum = (typeof ClientTotineScalarFieldEnum)[keyof typeof ClientTotineScalarFieldEnum]
+
+
+export const CarnetScalarFieldEnum = {
+  id: 'id',
+  numeroCarnet: 'numeroCarnet',
+  agentCollecteurId: 'agentCollecteurId',
+  clientTotineId: 'clientTotineId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CarnetScalarFieldEnum = (typeof CarnetScalarFieldEnum)[keyof typeof CarnetScalarFieldEnum]
+
+
+export const CotisationScalarFieldEnum = {
+  id: 'id',
+  mois: 'mois',
+  annee: 'annee',
+  mise: 'mise',
+  clientId: 'clientId',
+  carnetId: 'carnetId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  soldeDeCloture: 'soldeDeCloture',
+  soldeDisponible: 'soldeDisponible',
+  dateOuverture: 'dateOuverture',
+  dateCloture: 'dateCloture',
+  agenceId: 'agenceId',
+  agentCollecteurId: 'agentCollecteurId',
+  isActif: 'isActif'
+} as const
+
+export type CotisationScalarFieldEnum = (typeof CotisationScalarFieldEnum)[keyof typeof CotisationScalarFieldEnum]
+
+
+export const MouvementTotineScalarFieldEnum = {
+  id: 'id',
+  jour: 'jour',
+  montant: 'montant',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  carnetId: 'carnetId',
+  agenceId: 'agenceId',
+  utilisateurId: 'utilisateurId',
+  clientTotineId: 'clientTotineId'
+} as const
+
+export type MouvementTotineScalarFieldEnum = (typeof MouvementTotineScalarFieldEnum)[keyof typeof MouvementTotineScalarFieldEnum]
+
+
+export const ClientSoldeScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  soldeTotal: 'soldeTotal',
+  agenceId: 'agenceId',
+  agentCollecteurId: 'agentCollecteurId',
+  isActif: 'isActif'
+} as const
+
+export type ClientSoldeScalarFieldEnum = (typeof ClientSoldeScalarFieldEnum)[keyof typeof ClientSoldeScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

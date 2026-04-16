@@ -9,7 +9,48 @@
 * 🟢 You can import this file directly.
 */
 
+export const RoleUtilisateur = {
+  ADMIN: 'ADMIN',
+  CAISSIER: 'CAISSIER',
+  COLLECTEUR: 'COLLECTEUR'
+} as const
+
+export type RoleUtilisateur = (typeof RoleUtilisateur)[keyof typeof RoleUtilisateur]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const TypeMouvement = {
+  VERSEMENT: 'VERSEMENT',
+  RETRAIT: 'RETRAIT',
+  DEPOT: 'DEPOT'
+} as const
+
+export type TypeMouvement = (typeof TypeMouvement)[keyof typeof TypeMouvement]
+
+
+export const StatutTransaction = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  VALIDE: 'VALIDE',
+  REJETE: 'REJETE',
+  ANNULE: 'ANNULE',
+  REMBOURSE: 'REMBOURSE'
+} as const
+
+export type StatutTransaction = (typeof StatutTransaction)[keyof typeof StatutTransaction]
+
+
+export const Mois = {
+  JANVIER: 'JANVIER',
+  FEVRIER: 'FEVRIER',
+  MARS: 'MARS',
+  AVRIL: 'AVRIL',
+  MAI: 'MAI',
+  JUIN: 'JUIN',
+  JUILLET: 'JUILLET',
+  AOUT: 'AOUT',
+  SEPTEMBRE: 'SEPTEMBRE',
+  OCTOBRE: 'OCTOBRE',
+  NOVEMBRE: 'NOVEMBRE',
+  DECEMBRE: 'DECEMBRE'
+} as const
+
+export type Mois = (typeof Mois)[keyof typeof Mois]

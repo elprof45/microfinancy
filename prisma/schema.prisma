@@ -8,37 +8,15 @@ datasource db {
 }
 
 enum RoleUtilisateur {
-  SUPER_ADMIN
-  ADMIN_SOCIETE
-  GERANT_AGENCE
+  ADMIN
   CAISSIER
-  COLLECTEUR_ADC
-  LECTEUR
+  COLLECTEUR
 }
 
 enum TypeMouvement {
   VERSEMENT
   RETRAIT
-  VIREMENT
-  REMISE_CHEQUE
-  PAIEMENT_FACTURE
-  INTERETS
-  FRAIS
-  AJUSTEMENT
-  AUTRE
-}
-
-enum SensMouvement {
-  DEBIT
-  CREDIT
-}
-
-enum StatutCaisse {
-  OUVERTE
-  FERMEE
-  POINTAGE_EN_COURS
-  POINTAGE_OK
-  ECART
+  DEPOT
 }
 
 enum StatutTransaction {
@@ -53,7 +31,7 @@ model Societe {
   id            Int       @id @default(autoincrement())
   nom           String
   raisonSociale String?
-  siren         String?   @unique
+  identifiant   String?   @unique
   email         String?
   telephone     String?
   adresse       String?
@@ -62,12 +40,9 @@ model Societe {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  createdBy Int? // → Utilisateur
-  updatedBy Int?
 
   agences      Agence[]
-  utilisateurs Utilisateur[]      @relation("SocieteUtilisateurs")
-  parametres   ParametreSociete[]
+  utilisateurs Utilisateur[] @relation("SocieteUtilisateurs")
 }
 
 model Agence {
@@ -85,27 +60,15 @@ model Agence {
   updatedAt DateTime @updatedAt
 
   societe Societe @relation(fields: [societeId], references: [id], onDelete: Cascade)
-  zone    Zone?   @relation(fields: [zoneId], references: [id])
 
   caissiers         Utilisateur[]      @relation("AgenceCaissiers")
   collecteurs       Utilisateur[]      @relation("AgenceCollecteurs")
-  clients           ClientEpargne[]
+  clients           ClientTotine[]
   comptes           Compte[]
   mouvementsEpargne MouvementEpargne[]
-  etatsCaisses      EtatCaisse[]
   utilisateurs      Utilisateur[]
-}
-
-model Zone {
-  id        Int     @id @default(autoincrement())
-  nom       String
-  code      String? @unique
-  societeId Int?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  agences Agence[]
+  cotisations       Cotisation[]
+  mouvementTotines  MouvementTotine[]
 }
 
 model Utilisateur {
@@ -113,52 +76,25 @@ model Utilisateur {
   email          String          @unique
   motDePasseHash String
   nom            String
-  prenom         String?
   telephone      String?
-  matricule      String?         @unique
   role           RoleUtilisateur @default(CAISSIER)
   societeId      Int?
-  agenceId       Int? // null si admin société ou super-admin
-  isActive       Boolean         @default(true)
-  lastLogin      DateTime?
-  deletedAt      DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  agenceId       Int?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 
   societe Societe? @relation("SocieteUtilisateurs", fields: [societeId], references: [id])
   agence  Agence?  @relation(fields: [agenceId], references: [id], map: "Utilisateur_agenceId_fkey")
 
   agenceCaissier    Agence?            @relation("AgenceCaissiers", fields: [agenceId], references: [id], map: "Utilisateur_agenceId_caissier_fkey")
   agenceCollecteur  Agence?            @relation("AgenceCollecteurs", fields: [agenceId], references: [id], map: "Utilisateur_agenceId_collecteur_fkey")
-  caissierEtats     EtatCaisse[]       @relation("CaissierEtats")
   mouvements        MouvementItem[]
   createdMouvements MouvementEpargne[] @relation("CreatedBy")
-  auditLogs         AuditLog[]
-}
-
-model ClientEpargne {
-  id            Int       @id @default(autoincrement())
-  numeroClient  String    @unique
-  nom           String
-  prenom        String?
-  telephone     String?
-  email         String?
-  adresse       String?
-  dateNaissance DateTime?
-  pieceIdentite String? // numéro CNI, passeport...
-  agenceId      Int?
-  deviseId      String    @default("XOF") // ou ta devise par défaut
-  isActif       Boolean   @default(true)
-  deletedAt     DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  agence Agence? @relation(fields: [agenceId], references: [id])
-
-  comptes    Compte[]
-  mouvements MouvementEpargne[]
+  clientTotines     ClientTotine[]
+  carnets           Carnet[]
+  cotisations       Cotisation[]
+  mouvementTotines  MouvementTotine[]
+  clientSoldes      ClientSolde[]
 }
 
 model Compte {
@@ -177,8 +113,8 @@ model Compte {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  client ClientEpargne? @relation(fields: [clientId], references: [id])
-  agence Agence         @relation(fields: [agenceId], references: [id])
+  client ClientTotine? @relation(fields: [clientId], references: [id])
+  agence Agence        @relation(fields: [agenceId], references: [id])
 
   mouvements        MouvementItem[]
   mouvementEpargnes MouvementEpargne[]
@@ -188,7 +124,6 @@ model MouvementEpargne {
   id            Int               @id @default(autoincrement())
   reference     String            @unique
   type          TypeMouvement
-  sens          SensMouvement
   montant       Decimal
   soldeAvant    Decimal
   soldeApres    Decimal
@@ -204,80 +139,139 @@ model MouvementEpargne {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  agence  Agence         @relation(fields: [agenceId], references: [id])
-  client  ClientEpargne? @relation(fields: [clientId], references: [id])
-  compte  Compte?        @relation(fields: [compteId], references: [id])
-  creePar Utilisateur    @relation("CreatedBy", fields: [creeParId], references: [id])
-}
-
-model EtatCaisse {
-  id             Int          @id @default(autoincrement())
-  caissierId     Int
-  date           DateTime // date de la caisse (généralement journée)
-  soldeInitial   Decimal
-  totalRecettes  Decimal      @default(0)
-  totalDepenses  Decimal      @default(0)
-  soldeFinalTheo Decimal
-  soldeFinalReel Decimal?
-  ecart          Decimal?
-  statut         StatutCaisse @default(OUVERTE)
-  observations   String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  caissier Utilisateur @relation("CaissierEtats", fields: [caissierId], references: [id], onDelete: Cascade)
-
-  mouvements MouvementItem[] @relation("MouvementsCaisse")
-  agence     Agence?         @relation(fields: [agenceId], references: [id])
-  agenceId   Int?
+  agence            Agence           @relation(fields: [agenceId], references: [id])
+  client            ClientTotine?    @relation(fields: [clientId], references: [id])
+  compte            Compte?          @relation(fields: [compteId], references: [id])
+  creePar           Utilisateur      @relation("CreatedBy", fields: [creeParId], references: [id])
+  cotisation        Cotisation?      @relation(fields: [cotisationId], references: [id])
+  cotisationId      Int?
+  mouvementTotine   MouvementTotine? @relation(fields: [mouvementTotineId], references: [id])
+  mouvementTotineId Int?
 }
 
 model MouvementItem {
-  id           Int               @id @default(autoincrement())
-  reference    String?
-  type         String // "ESPECES", "CHEQUE", "VIREMENT", "MOBILE_MONEY"...
-  sens         SensMouvement
-  montant      Decimal
-  date         DateTime
-  etatCaisseId Int?
-  compteId     Int?
-  caissierId   Int?
-  statut       StatutTransaction @default(VALIDE)
+  id         Int               @id @default(autoincrement())
+  reference  String?
+  type       String
+  montant    Decimal
+  date       DateTime
+  compteId   Int?
+  caissierId Int?
+  statut     StatutTransaction @default(VALIDE)
 
   createdAt DateTime @default(now())
 
-  caissier   Utilisateur? @relation(fields: [caissierId], references: [id])
-  compte     Compte?      @relation(fields: [compteId], references: [id])
-  etatCaisse EtatCaisse?  @relation("MouvementsCaisse", fields: [etatCaisseId], references: [id])
+  caissier          Utilisateur?     @relation(fields: [caissierId], references: [id])
+  compte            Compte?          @relation(fields: [compteId], references: [id])
+  cotisation        Cotisation?      @relation(fields: [cotisationId], references: [id])
+  cotisationId      Int?
+  mouvementTotine   MouvementTotine? @relation(fields: [mouvementTotineId], references: [id])
+  mouvementTotineId Int?
 }
 
-model AuditLog {
-  id            Int          @id @default(autoincrement())
-  utilisateurId Int?
-  action        String // "CREATE_MOUVEMENT", "FERMER_CAISSE", "VALIDER_TRANSACTION"...
-  entite        String
-  entiteId      Int?
-  avant         Json?
-  apres         Json?
-  ip            String?
-  userAgent     String?
-  date          DateTime     @default(now())
-  utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
-}
-
-model ParametreSociete {
-  id          Int     @id @default(autoincrement())
-  societeId   Int
-  cle         String // "TAUX_INTERET_EPARGNE", "PLAfond_RETRAIT_JOUR", "COMMISSION_ADC"...
-  valeur      String
-  type        String // "DECIMAL", "INTEGER", "BOOLEAN", "STRING"
-  description String?
+model ClientTotine {
+  id                Int     @id @default(autoincrement())
+  numeroClient      String  @unique
+  nom               String
+  telephone         String?
+  email             String?
+  agentCollecteurId Int
+  agenceId          Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  societe Societe @relation(fields: [societeId], references: [id], onDelete: Cascade)
+  agence       Agence      @relation(fields: [agenceId], references: [id])
+  utilisateurs Utilisateur @relation(fields: [agentCollecteurId], references: [id])
 
-  @@unique([societeId, cle])
+  comptes          Compte[]
+  mouvements       MouvementEpargne[]
+  carnets          Carnet[]
+  cotisations      Cotisation[]
+  mouvementTotines MouvementTotine[]
+  clientSoldes     ClientSolde[]
+}
+
+model Carnet {
+  id                Int      @id @default(autoincrement())
+  numeroCarnet      String   @unique
+  agentCollecteurId Int
+  clientTotineId    Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  client           ClientTotine?     @relation(fields: [clientTotineId], references: [id])
+  utilisateurs     Utilisateur?      @relation(fields: [agentCollecteurId], references: [id])
+  cotisations      Cotisation[]
+  mouvementTotines MouvementTotine[]
+}
+
+enum Mois {
+  JANVIER
+  FEVRIER
+  MARS
+  AVRIL
+  MAI
+  JUIN
+  JUILLET
+  AOUT
+  SEPTEMBRE
+  OCTOBRE
+  NOVEMBRE
+  DECEMBRE
+}
+
+model Cotisation {
+  id                Int       @id @default(autoincrement())
+  mois              Mois
+  annee             Int
+  mise              Decimal
+  clientId          Int
+  carnetId          Int
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  soldeDeCloture    Decimal?
+  soldeDisponible   Decimal
+  dateOuverture     DateTime  @default(now())
+  dateCloture       DateTime?
+  agenceId          Int
+  agentCollecteurId Int
+  isActif           Boolean   @default(true)
+
+  mouvements        MouvementItem[]
+  agence            Agence             @relation(fields: [agenceId], references: [id])
+  utilisateurs      Utilisateur?       @relation(fields: [agentCollecteurId], references: [id])
+  client            ClientTotine       @relation(fields: [clientId], references: [id])
+  carnet            Carnet             @relation(fields: [carnetId], references: [id])
+  mouvementEpargnes MouvementEpargne[]
+}
+
+model MouvementTotine {
+  id                Int                @id @default(autoincrement())
+  jour              Int
+  montant           Decimal
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  carnetId          Int
+  carnet            Carnet             @relation(fields: [carnetId], references: [id])
+  agence            Agence?            @relation(fields: [agenceId], references: [id])
+  agenceId          Int?
+  utilisateur       Utilisateur?       @relation(fields: [utilisateurId], references: [id])
+  utilisateurId     Int?
+  mouvementEpargnes MouvementEpargne[]
+  mouvementItems    MouvementItem[]
+  clientTotine      ClientTotine?      @relation(fields: [clientTotineId], references: [id])
+  clientTotineId    Int?
+}
+
+model ClientSolde {
+  id                Int     @id @default(autoincrement())
+  clientId          Int
+  soldeTotal        Decimal
+  agenceId          Int
+  agentCollecteurId Int
+  isActif           Boolean @default(true)
+
+  client       ClientTotine? @relation(fields: [clientId], references: [id])
+  utilisateurs Utilisateur?  @relation(fields: [agentCollecteurId], references: [id])
 }
