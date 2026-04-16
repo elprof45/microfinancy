@@ -1,16 +1,16 @@
 # --- SOCIETIES ---
 
 ### Read Societies
-GET http://localhost:3000/societies
+GET http://localhost:3030/societies
 
 ### Read Society by ID
-GET http://localhost:3000/societies/2
+GET http://localhost:3030/societies/2
 
 ### Society Stats
-GET http://localhost:3000/societies/2/stats
+GET http://localhost:3030/societies/2/stats
 
 ### Create Society
-POST http://localhost:3000/societies
+POST http://localhost:3030/societies
 Content-Type: application/json
 
 {
@@ -37,16 +37,16 @@ DELETE http://localhost:3000/societies/1
 # --- AGENCES ---
 
 ### Read Agences
-GET http://localhost:3000/agences
+GET http://localhost:3030/agences
 
 ### Read Agence by ID
-GET http://localhost:3000/agences/1
+GET http://localhost:3030/agences/1
 
 ### Agence Stats
-GET http://localhost:3000/agences/1/stats
+GET http://localhost:3030/agences/1/stats
 
 ### Create Agence
-POST http://localhost:3000/agences
+POST http://localhost:3030/agences
 Content-Type: application/json
 
 {
@@ -54,11 +54,11 @@ Content-Type: application/json
     "nom": "Agence Atakpame",
     "adresse": "Atakpame, Togo",
     "telephone": "+22890000000",
-    "societeId": 2
+    "societeId": 1
 }
 
 ### Update Agence
-PUT http://localhost:3000/agences/1
+PUT http://localhost:3030/agences/1
 Content-Type: application/json
 
 {
@@ -66,22 +66,22 @@ Content-Type: application/json
 }
 
 ### Delete Agence
-DELETE http://localhost:3000/agences/1
+DELETE http://localhost:3030/agences/1
 
 
 # --- USERS ---
 
 ### Read Users
-GET http://localhost:3000/users
+GET http://localhost:3030/users
 
 ### Read User by ID
-GET http://localhost:3000/users/1
+GET http://localhost:3030/users/1
 
 ### User Stats
-GET http://localhost:3000/users/1/stats
+GET http://localhost:3030/users/1/stats
 
 ### Create User
-POST http://localhost:3000/users
+POST http://localhost:3030/users
 Content-Type: application/json
 
 {
@@ -95,7 +95,7 @@ Content-Type: application/json
 }
 
 ### Update User
-PUT http://localhost:3000/users/1
+PUT http://localhost:3030/users/1
 Content-Type: application/json
 
 {
@@ -104,19 +104,19 @@ Content-Type: application/json
 }
 
 ### Delete User
-DELETE http://localhost:3000/users/2
+DELETE http://localhost:3030/users/2
 
 
 # --- CLIENT TOTINES ---
 
 ### Read Client Totines
-GET http://localhost:3000/client-totines
+GET http://localhost:3030/client-totines
 
 ### Read Client Totine by ID
-GET http://localhost:3000/client-totines/1
+GET http://localhost:3030/client-totines/1
 
 ### Create Client Totine
-POST http://localhost:3000/client-totines
+POST http://localhost:3030/client-totines
 Content-Type: application/json
 
 {
@@ -129,7 +129,7 @@ Content-Type: application/json
 }
 
 ### Update Client Totine
-PUT http://localhost:3000/client-totines/1
+PUT http://localhost:3030/client-totines/1
 Content-Type: application/json
 
 {
@@ -138,19 +138,19 @@ Content-Type: application/json
 }
 
 ### Delete Client Totine
-DELETE http://localhost:3000/client-totines/1
+DELETE http://localhost:3030/client-totines/1
 
 
 # --- CARNETS ---
 
 ### Read Carnets
-GET http://localhost:3000/carnets
+GET http://localhost:3030/carnets
 
 ### Read Carnet by ID
-GET http://localhost:3000/carnets/1
+GET http://localhost:3030/carnets/1
 
 ### Create Carnet
-POST http://localhost:3000/carnets
+POST http://localhost:3030/carnets
 Content-Type: application/json
 
 {

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Sociétés</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="/app/validation.js" defer></script>
+  <script src="/app/shared.js" defer></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <div class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-slate-800 to-slate-900 text-white shadow-lg sticky top-0 z-40">
+      <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div>
+          <a href="/" class="text-2xl font-bold">📊 Microfinance</a>
+        </div>
+        <div class="flex gap-4">
+          <a href="index.html" class="px-4 py-2 rounded hover:bg-slate-700 transition">Accueil</a>
+          <a href="agences.html" class="px-4 py-2 rounded hover:bg-slate-700 transition">Agences</a>
+          <a href="users.html" class="px-4 py-2 rounded hover:bg-slate-700 transition">Utilisateurs</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto w-full p-6" x-data="entityManager('societies', { nom: '', raisonSociale: '', email: '', telephone: '', adresse: '' }, ['id', 'nom', 'email', 'telephone'], {})" @click.outside="if ($el.querySelector('[x-show=details]')?.offsetParent) clearSelection()" x-init="await loadList()">
+      
+      <!-- Toast Notifications -->
+      <template x-if="message && messageType === 'success'">
+        <div class="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 shadow-sm animate-in">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">✅</span>
+            <div>
+              <p class="font-semibold text-emerald-900" x-text="message"></p>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template x-if="error && messageType === 'error'">
+        <div class="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 shadow-sm animate-in">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">❌</span>
+            <div>
+              <p class="font-semibold text-rose-900">Erreur</p>
+              <p class="text-sm text-rose-700" x-text="error"></p>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- Page Title -->
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold text-slate-900">Gestion des Sociétés</h1>
+        <p class="text-slate-600 mt-2">Créez, modifiez et supprimez les sociétés de votre portefeuille</p>
+      </div>
+
+      <!-- Grid Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: List -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+            <!-- Header with Add Button -->
+            <div class="flex items-center justify-between border-b border-slate-200 p-6">
+              <h2 class="text-xl font-semibold">Sociétés (<span x-text="items.length"></span>)</h2>
+              <button @click="clearSelection(); form.nom = ''; form.raisonSociale = ''; form.email = ''; form.telephone = ''" 
+                class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center gap-2">
+                ➕ Nouvelle
+              </button>
+            </div>
+
+            <!-- Loading State -->
+            <template x-if="loading && items.length === 0">
+              <div class="p-8 text-center text-slate-500">
+                <p>⏳ Chargement...</p>
+              </div>
+            </template>
+
+            <!-- Empty State -->
+            <template x-if="!loading && items.length === 0">
+              <div class="p-8 text-center text-slate-500">
+                <p class="text-lg">📭 Aucune société trouvée</p>
+                <p class="text-sm mt-2">Créez votre première société pour commencer</p>
+              </div>
+            </template>
+
+            <!-- Table -->
+            <template x-if="items.length > 0">
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-slate-50 border-b border-slate-200">
+                    <tr>
+                      <th class="px-6 py-3 text-left font-semibold text-slate-700">Nom</th>
+                      <th class="px-6 py-3 text-left font-semibold text-slate-700">Email</th>
+                      <th class="px-6 py-3 text-left font-semibold text-slate-700">Téléphone</th>
+                      <th class="px-6 py-3 text-right font-semibold text-slate-700">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    <template x-for="item in items" :key="item.id">
+                      <tr class="hover:bg-slate-50 cursor-pointer transition" :class="{ 'bg-blue-50': selected?.id === item.id }" @click="selectItem(item)">
+                        <td class="px-6 py-4 font-medium text-slate-900" x-text="item.nom"></td>
+                        <td class="px-6 py-4 text-slate-600" x-text="item.email || '—'"></td>
+                        <td class="px-6 py-4 text-slate-600" x-text="item.telephone || '—'"></td>
+                        <td class="px-6 py-4 text-right">
+                          <button @click.stop="deleteItem(item.id)" 
+                            class="px-3 py-1 text-rose-600 hover:bg-rose-50 rounded transition text-sm font-medium">
+                            🗑 Supprimer
+                          </button>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 sticky top-32">
+            <div class="border-b border-slate-200 p-6">
+              <h3 class="text-lg font-semibold" x-text="selected ? '✏️ Modifier' : '➕ Créer'"></h3>
+            </div>
+
+            <form @submit.prevent="selected ? updateItem() : createItem()" class="p-6 space-y-4">
+              
+              <!-- Nom Field -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Nom *</label>
+                <input x-model="form.nom" type="text" placeholder="Ex: Société XYZ"
+                  :class="{ 'border-rose-300 bg-rose-50': hasError('nom'), 'border-slate-300': !hasError('nom') }"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
+                <template x-if="hasError('nom')">
+                  <p class="text-xs text-rose-600 mt-1" x-text="getError('nom')"></p>
+                </template>
+              </div>
+
+              <!-- Raison Sociale Field -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Raison Sociale *</label>
+                <input x-model="form.raisonSociale" type="text" placeholder="Ex: SARL XYZ"
+                  :class="{ 'border-rose-300 bg-rose-50': hasError('raisonSociale'), 'border-slate-300': !hasError('raisonSociale') }"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
+                <template x-if="hasError('raisonSociale')">
+                  <p class="text-xs text-rose-600 mt-1" x-text="getError('raisonSociale')"></p>
+                </template>
+              </div>
+
+              <!-- Email Field -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                <input x-model="form.email" type="email" placeholder="exemple@societe.com"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
+              </div>
+
+              <!-- Telephone Field -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Téléphone</label>
+                <input x-model="form.telephone" type="tel" placeholder="+212 612345678"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" />
+              </div>
+
+              <!-- Adresse Field -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Adresse</label>
+                <textarea x-model="form.adresse" placeholder="Adresse complète"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition resize-none" rows="2"></textarea>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex gap-2 pt-4">
+                <button type="submit" :disabled="loading"
+                  :class="{ 'opacity-50 cursor-not-allowed': loading, 'hover:bg-emerald-700': !loading }"
+                  class="flex-1 px-4 py-2 bg-emerald-600 text-white rounded-lg transition font-medium">
+                  <span x-show="!loading" x-text="selected ? '💾 Mettre à jour' : '➕ Créer'"></span>
+                  <span x-show="loading">⏳ Envoi...</span>
+                </button>
+                <template x-if="selected">
+                  <button type="button" @click="clearSelection()"
+                    class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition font-medium">
+                    Annuler
+                  </button>
+                </template>
+              </div>
+
+              <!-- Form Errors -->
+              <template x-if="Object.keys(errors).length > 0">
+                <div class="mt-4 rounded-lg border border-rose-200 bg-rose-50 p-3">
+                  <p class="text-xs font-semibold text-rose-900 mb-2">Erreurs du formulaire:</p>
+                  <ul class="text-xs text-rose-700 space-y-1">
+                    <template x-for="(msg, field) in errors" :key="field">
+                      <li>• <span x-text="msg"></span></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-4 mt-12 text-center text-sm text-slate-400">
+      <p>Microfinance © 2026 - CRUD Demo with Hono + Prisma + Alpine</p>
+    </footer>
+  </div>
+</body>
+</html>
