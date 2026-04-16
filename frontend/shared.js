@@ -1,5 +1,5 @@
 window.API = {
-  base: 'http://localhost:3000',
+  base: '',
   async request(path, options = {}) {
     const response = await fetch(this.base + path, {
       headers: { 'Content-Type': 'application/json' },
