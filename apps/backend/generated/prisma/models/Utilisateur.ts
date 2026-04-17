@@ -47,6 +47,8 @@ export type UtilisateurMinAggregateOutputType = {
   role: $Enums.RoleUtilisateur | null
   societeId: number | null
   agenceId: number | null
+  isActive: boolean | null
+  lastLogin: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +62,8 @@ export type UtilisateurMaxAggregateOutputType = {
   role: $Enums.RoleUtilisateur | null
   societeId: number | null
   agenceId: number | null
+  isActive: boolean | null
+  lastLogin: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -73,6 +77,8 @@ export type UtilisateurCountAggregateOutputType = {
   role: number
   societeId: number
   agenceId: number
+  isActive: number
+  lastLogin: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -100,6 +106,8 @@ export type UtilisateurMinAggregateInputType = {
   role?: true
   societeId?: true
   agenceId?: true
+  isActive?: true
+  lastLogin?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -113,6 +121,8 @@ export type UtilisateurMaxAggregateInputType = {
   role?: true
   societeId?: true
   agenceId?: true
+  isActive?: true
+  lastLogin?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -126,6 +136,8 @@ export type UtilisateurCountAggregateInputType = {
   role?: true
   societeId?: true
   agenceId?: true
+  isActive?: true
+  lastLogin?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -226,6 +238,8 @@ export type UtilisateurGroupByOutputType = {
   role: $Enums.RoleUtilisateur
   societeId: number | null
   agenceId: number | null
+  isActive: boolean
+  lastLogin: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UtilisateurCountAggregateOutputType | null
@@ -262,12 +276,12 @@ export type UtilisateurWhereInput = {
   role?: Prisma.EnumRoleUtilisateurFilter<"Utilisateur"> | $Enums.RoleUtilisateur
   societeId?: Prisma.IntNullableFilter<"Utilisateur"> | number | null
   agenceId?: Prisma.IntNullableFilter<"Utilisateur"> | number | null
+  isActive?: Prisma.BoolFilter<"Utilisateur"> | boolean
+  lastLogin?: Prisma.DateTimeNullableFilter<"Utilisateur"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   societe?: Prisma.XOR<Prisma.SocieteNullableScalarRelationFilter, Prisma.SocieteWhereInput> | null
   agence?: Prisma.XOR<Prisma.AgenceNullableScalarRelationFilter, Prisma.AgenceWhereInput> | null
-  agenceCaissier?: Prisma.XOR<Prisma.AgenceNullableScalarRelationFilter, Prisma.AgenceWhereInput> | null
-  agenceCollecteur?: Prisma.XOR<Prisma.AgenceNullableScalarRelationFilter, Prisma.AgenceWhereInput> | null
   mouvements?: Prisma.MouvementItemListRelationFilter
   createdMouvements?: Prisma.MouvementEpargneListRelationFilter
   clientTotines?: Prisma.ClientTotineListRelationFilter
@@ -286,12 +300,12 @@ export type UtilisateurOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   societeId?: Prisma.SortOrderInput | Prisma.SortOrder
   agenceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  lastLogin?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   societe?: Prisma.SocieteOrderByWithRelationInput
   agence?: Prisma.AgenceOrderByWithRelationInput
-  agenceCaissier?: Prisma.AgenceOrderByWithRelationInput
-  agenceCollecteur?: Prisma.AgenceOrderByWithRelationInput
   mouvements?: Prisma.MouvementItemOrderByRelationAggregateInput
   createdMouvements?: Prisma.MouvementEpargneOrderByRelationAggregateInput
   clientTotines?: Prisma.ClientTotineOrderByRelationAggregateInput
@@ -313,12 +327,12 @@ export type UtilisateurWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumRoleUtilisateurFilter<"Utilisateur"> | $Enums.RoleUtilisateur
   societeId?: Prisma.IntNullableFilter<"Utilisateur"> | number | null
   agenceId?: Prisma.IntNullableFilter<"Utilisateur"> | number | null
+  isActive?: Prisma.BoolFilter<"Utilisateur"> | boolean
+  lastLogin?: Prisma.DateTimeNullableFilter<"Utilisateur"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   societe?: Prisma.XOR<Prisma.SocieteNullableScalarRelationFilter, Prisma.SocieteWhereInput> | null
   agence?: Prisma.XOR<Prisma.AgenceNullableScalarRelationFilter, Prisma.AgenceWhereInput> | null
-  agenceCaissier?: Prisma.XOR<Prisma.AgenceNullableScalarRelationFilter, Prisma.AgenceWhereInput> | null
-  agenceCollecteur?: Prisma.XOR<Prisma.AgenceNullableScalarRelationFilter, Prisma.AgenceWhereInput> | null
   mouvements?: Prisma.MouvementItemListRelationFilter
   createdMouvements?: Prisma.MouvementEpargneListRelationFilter
   clientTotines?: Prisma.ClientTotineListRelationFilter
@@ -337,6 +351,8 @@ export type UtilisateurOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   societeId?: Prisma.SortOrderInput | Prisma.SortOrder
   agenceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  lastLogin?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UtilisateurCountOrderByAggregateInput
@@ -358,6 +374,8 @@ export type UtilisateurScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumRoleUtilisateurWithAggregatesFilter<"Utilisateur"> | $Enums.RoleUtilisateur
   societeId?: Prisma.IntNullableWithAggregatesFilter<"Utilisateur"> | number | null
   agenceId?: Prisma.IntNullableWithAggregatesFilter<"Utilisateur"> | number | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"Utilisateur"> | boolean
+  lastLogin?: Prisma.DateTimeNullableWithAggregatesFilter<"Utilisateur"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Utilisateur"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Utilisateur"> | Date | string
 }
@@ -368,12 +386,12 @@ export type UtilisateurCreateInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -392,6 +410,8 @@ export type UtilisateurUncheckedCreateInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -409,12 +429,12 @@ export type UtilisateurUpdateInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -433,6 +453,8 @@ export type UtilisateurUncheckedUpdateInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -453,6 +475,8 @@ export type UtilisateurCreateManyInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -463,6 +487,8 @@ export type UtilisateurUpdateManyMutationInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -476,6 +502,8 @@ export type UtilisateurUncheckedUpdateManyInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -499,6 +527,8 @@ export type UtilisateurCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   societeId?: Prisma.SortOrder
   agenceId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  lastLogin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -518,6 +548,8 @@ export type UtilisateurMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   societeId?: Prisma.SortOrder
   agenceId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  lastLogin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -531,6 +563,8 @@ export type UtilisateurMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   societeId?: Prisma.SortOrder
   agenceId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  lastLogin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -593,38 +627,10 @@ export type UtilisateurUncheckedUpdateManyWithoutSocieteNestedInput = {
   deleteMany?: Prisma.UtilisateurScalarWhereInput | Prisma.UtilisateurScalarWhereInput[]
 }
 
-export type UtilisateurCreateNestedManyWithoutAgenceCaissierInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput> | Prisma.UtilisateurCreateWithoutAgenceCaissierInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCaissierInputEnvelope
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-}
-
-export type UtilisateurCreateNestedManyWithoutAgenceCollecteurInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput> | Prisma.UtilisateurCreateWithoutAgenceCollecteurInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCollecteurInputEnvelope
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-}
-
 export type UtilisateurCreateNestedManyWithoutAgenceInput = {
   create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceInput> | Prisma.UtilisateurCreateWithoutAgenceInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceInput[]
   connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceInput[]
   createMany?: Prisma.UtilisateurCreateManyAgenceInputEnvelope
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-}
-
-export type UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput> | Prisma.UtilisateurCreateWithoutAgenceCaissierInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCaissierInputEnvelope
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-}
-
-export type UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput> | Prisma.UtilisateurCreateWithoutAgenceCollecteurInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCollecteurInputEnvelope
   connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
 }
 
@@ -633,34 +639,6 @@ export type UtilisateurUncheckedCreateNestedManyWithoutAgenceInput = {
   connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceInput[]
   createMany?: Prisma.UtilisateurCreateManyAgenceInputEnvelope
   connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-}
-
-export type UtilisateurUpdateManyWithoutAgenceCaissierNestedInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput> | Prisma.UtilisateurCreateWithoutAgenceCaissierInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput[]
-  upsert?: Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCaissierInput | Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCaissierInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCaissierInputEnvelope
-  set?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  disconnect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  delete?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  update?: Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCaissierInput | Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCaissierInput[]
-  updateMany?: Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCaissierInput | Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCaissierInput[]
-  deleteMany?: Prisma.UtilisateurScalarWhereInput | Prisma.UtilisateurScalarWhereInput[]
-}
-
-export type UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput> | Prisma.UtilisateurCreateWithoutAgenceCollecteurInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput[]
-  upsert?: Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCollecteurInput | Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCollecteurInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCollecteurInputEnvelope
-  set?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  disconnect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  delete?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  update?: Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCollecteurInput | Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCollecteurInput[]
-  updateMany?: Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCollecteurInput | Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCollecteurInput[]
-  deleteMany?: Prisma.UtilisateurScalarWhereInput | Prisma.UtilisateurScalarWhereInput[]
 }
 
 export type UtilisateurUpdateManyWithoutAgenceNestedInput = {
@@ -674,34 +652,6 @@ export type UtilisateurUpdateManyWithoutAgenceNestedInput = {
   connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
   update?: Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceInput | Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceInput[]
   updateMany?: Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceInput | Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceInput[]
-  deleteMany?: Prisma.UtilisateurScalarWhereInput | Prisma.UtilisateurScalarWhereInput[]
-}
-
-export type UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput> | Prisma.UtilisateurCreateWithoutAgenceCaissierInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCaissierInput[]
-  upsert?: Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCaissierInput | Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCaissierInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCaissierInputEnvelope
-  set?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  disconnect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  delete?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  update?: Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCaissierInput | Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCaissierInput[]
-  updateMany?: Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCaissierInput | Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCaissierInput[]
-  deleteMany?: Prisma.UtilisateurScalarWhereInput | Prisma.UtilisateurScalarWhereInput[]
-}
-
-export type UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput = {
-  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput> | Prisma.UtilisateurCreateWithoutAgenceCollecteurInput[] | Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput[]
-  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput | Prisma.UtilisateurCreateOrConnectWithoutAgenceCollecteurInput[]
-  upsert?: Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCollecteurInput | Prisma.UtilisateurUpsertWithWhereUniqueWithoutAgenceCollecteurInput[]
-  createMany?: Prisma.UtilisateurCreateManyAgenceCollecteurInputEnvelope
-  set?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  disconnect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  delete?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  connect?: Prisma.UtilisateurWhereUniqueInput | Prisma.UtilisateurWhereUniqueInput[]
-  update?: Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCollecteurInput | Prisma.UtilisateurUpdateWithWhereUniqueWithoutAgenceCollecteurInput[]
-  updateMany?: Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCollecteurInput | Prisma.UtilisateurUpdateManyWithWhereWithoutAgenceCollecteurInput[]
   deleteMany?: Prisma.UtilisateurScalarWhereInput | Prisma.UtilisateurScalarWhereInput[]
 }
 
@@ -837,11 +787,11 @@ export type UtilisateurCreateWithoutSocieteInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -859,6 +809,8 @@ export type UtilisateurUncheckedCreateWithoutSocieteInput = {
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -908,106 +860,10 @@ export type UtilisateurScalarWhereInput = {
   role?: Prisma.EnumRoleUtilisateurFilter<"Utilisateur"> | $Enums.RoleUtilisateur
   societeId?: Prisma.IntNullableFilter<"Utilisateur"> | number | null
   agenceId?: Prisma.IntNullableFilter<"Utilisateur"> | number | null
+  isActive?: Prisma.BoolFilter<"Utilisateur"> | boolean
+  lastLogin?: Prisma.DateTimeNullableFilter<"Utilisateur"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
-}
-
-export type UtilisateurCreateWithoutAgenceCaissierInput = {
-  email: string
-  motDePasseHash: string
-  nom: string
-  telephone?: string | null
-  role?: $Enums.RoleUtilisateur
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
-  agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
-  mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
-  createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
-  clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
-  carnets?: Prisma.CarnetCreateNestedManyWithoutUtilisateursInput
-  cotisations?: Prisma.CotisationCreateNestedManyWithoutUtilisateursInput
-  mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutUtilisateurInput
-  clientSoldes?: Prisma.ClientSoldeCreateNestedManyWithoutUtilisateursInput
-}
-
-export type UtilisateurUncheckedCreateWithoutAgenceCaissierInput = {
-  id?: number
-  email: string
-  motDePasseHash: string
-  nom: string
-  telephone?: string | null
-  role?: $Enums.RoleUtilisateur
-  societeId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
-  createdMouvements?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutCreeParInput
-  clientTotines?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutUtilisateursInput
-  carnets?: Prisma.CarnetUncheckedCreateNestedManyWithoutUtilisateursInput
-  cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutUtilisateursInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutUtilisateurInput
-  clientSoldes?: Prisma.ClientSoldeUncheckedCreateNestedManyWithoutUtilisateursInput
-}
-
-export type UtilisateurCreateOrConnectWithoutAgenceCaissierInput = {
-  where: Prisma.UtilisateurWhereUniqueInput
-  create: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput>
-}
-
-export type UtilisateurCreateManyAgenceCaissierInputEnvelope = {
-  data: Prisma.UtilisateurCreateManyAgenceCaissierInput | Prisma.UtilisateurCreateManyAgenceCaissierInput[]
-  skipDuplicates?: boolean
-}
-
-export type UtilisateurCreateWithoutAgenceCollecteurInput = {
-  email: string
-  motDePasseHash: string
-  nom: string
-  telephone?: string | null
-  role?: $Enums.RoleUtilisateur
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
-  agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
-  createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
-  clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
-  carnets?: Prisma.CarnetCreateNestedManyWithoutUtilisateursInput
-  cotisations?: Prisma.CotisationCreateNestedManyWithoutUtilisateursInput
-  mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutUtilisateurInput
-  clientSoldes?: Prisma.ClientSoldeCreateNestedManyWithoutUtilisateursInput
-}
-
-export type UtilisateurUncheckedCreateWithoutAgenceCollecteurInput = {
-  id?: number
-  email: string
-  motDePasseHash: string
-  nom: string
-  telephone?: string | null
-  role?: $Enums.RoleUtilisateur
-  societeId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
-  createdMouvements?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutCreeParInput
-  clientTotines?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutUtilisateursInput
-  carnets?: Prisma.CarnetUncheckedCreateNestedManyWithoutUtilisateursInput
-  cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutUtilisateursInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutUtilisateurInput
-  clientSoldes?: Prisma.ClientSoldeUncheckedCreateNestedManyWithoutUtilisateursInput
-}
-
-export type UtilisateurCreateOrConnectWithoutAgenceCollecteurInput = {
-  where: Prisma.UtilisateurWhereUniqueInput
-  create: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput>
-}
-
-export type UtilisateurCreateManyAgenceCollecteurInputEnvelope = {
-  data: Prisma.UtilisateurCreateManyAgenceCollecteurInput | Prisma.UtilisateurCreateManyAgenceCollecteurInput[]
-  skipDuplicates?: boolean
 }
 
 export type UtilisateurCreateWithoutAgenceInput = {
@@ -1016,11 +872,11 @@ export type UtilisateurCreateWithoutAgenceInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -1038,6 +894,8 @@ export type UtilisateurUncheckedCreateWithoutAgenceInput = {
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1057,38 +915,6 @@ export type UtilisateurCreateOrConnectWithoutAgenceInput = {
 export type UtilisateurCreateManyAgenceInputEnvelope = {
   data: Prisma.UtilisateurCreateManyAgenceInput | Prisma.UtilisateurCreateManyAgenceInput[]
   skipDuplicates?: boolean
-}
-
-export type UtilisateurUpsertWithWhereUniqueWithoutAgenceCaissierInput = {
-  where: Prisma.UtilisateurWhereUniqueInput
-  update: Prisma.XOR<Prisma.UtilisateurUpdateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedUpdateWithoutAgenceCaissierInput>
-  create: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCaissierInput>
-}
-
-export type UtilisateurUpdateWithWhereUniqueWithoutAgenceCaissierInput = {
-  where: Prisma.UtilisateurWhereUniqueInput
-  data: Prisma.XOR<Prisma.UtilisateurUpdateWithoutAgenceCaissierInput, Prisma.UtilisateurUncheckedUpdateWithoutAgenceCaissierInput>
-}
-
-export type UtilisateurUpdateManyWithWhereWithoutAgenceCaissierInput = {
-  where: Prisma.UtilisateurScalarWhereInput
-  data: Prisma.XOR<Prisma.UtilisateurUpdateManyMutationInput, Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierInput>
-}
-
-export type UtilisateurUpsertWithWhereUniqueWithoutAgenceCollecteurInput = {
-  where: Prisma.UtilisateurWhereUniqueInput
-  update: Prisma.XOR<Prisma.UtilisateurUpdateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedUpdateWithoutAgenceCollecteurInput>
-  create: Prisma.XOR<Prisma.UtilisateurCreateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedCreateWithoutAgenceCollecteurInput>
-}
-
-export type UtilisateurUpdateWithWhereUniqueWithoutAgenceCollecteurInput = {
-  where: Prisma.UtilisateurWhereUniqueInput
-  data: Prisma.XOR<Prisma.UtilisateurUpdateWithoutAgenceCollecteurInput, Prisma.UtilisateurUncheckedUpdateWithoutAgenceCollecteurInput>
-}
-
-export type UtilisateurUpdateManyWithWhereWithoutAgenceCollecteurInput = {
-  where: Prisma.UtilisateurScalarWhereInput
-  data: Prisma.XOR<Prisma.UtilisateurUpdateManyMutationInput, Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurInput>
 }
 
 export type UtilisateurUpsertWithWhereUniqueWithoutAgenceInput = {
@@ -1113,12 +939,12 @@ export type UtilisateurCreateWithoutCreatedMouvementsInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
   carnets?: Prisma.CarnetCreateNestedManyWithoutUtilisateursInput
@@ -1136,6 +962,8 @@ export type UtilisateurUncheckedCreateWithoutCreatedMouvementsInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1168,12 +996,12 @@ export type UtilisateurUpdateWithoutCreatedMouvementsInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
   carnets?: Prisma.CarnetUpdateManyWithoutUtilisateursNestedInput
@@ -1191,6 +1019,8 @@ export type UtilisateurUncheckedUpdateWithoutCreatedMouvementsInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1207,12 +1037,12 @@ export type UtilisateurCreateWithoutMouvementsInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
   carnets?: Prisma.CarnetCreateNestedManyWithoutUtilisateursInput
@@ -1230,6 +1060,8 @@ export type UtilisateurUncheckedCreateWithoutMouvementsInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdMouvements?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutCreeParInput
@@ -1262,12 +1094,12 @@ export type UtilisateurUpdateWithoutMouvementsInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
   carnets?: Prisma.CarnetUpdateManyWithoutUtilisateursNestedInput
@@ -1285,6 +1117,8 @@ export type UtilisateurUncheckedUpdateWithoutMouvementsInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdMouvements?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutCreeParNestedInput
@@ -1301,12 +1135,12 @@ export type UtilisateurCreateWithoutClientTotinesInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   carnets?: Prisma.CarnetCreateNestedManyWithoutUtilisateursInput
@@ -1324,6 +1158,8 @@ export type UtilisateurUncheckedCreateWithoutClientTotinesInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1356,12 +1192,12 @@ export type UtilisateurUpdateWithoutClientTotinesInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   carnets?: Prisma.CarnetUpdateManyWithoutUtilisateursNestedInput
@@ -1379,6 +1215,8 @@ export type UtilisateurUncheckedUpdateWithoutClientTotinesInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1395,12 +1233,12 @@ export type UtilisateurCreateWithoutCarnetsInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -1418,6 +1256,8 @@ export type UtilisateurUncheckedCreateWithoutCarnetsInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1450,12 +1290,12 @@ export type UtilisateurUpdateWithoutCarnetsInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -1473,6 +1313,8 @@ export type UtilisateurUncheckedUpdateWithoutCarnetsInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1489,12 +1331,12 @@ export type UtilisateurCreateWithoutCotisationsInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -1512,6 +1354,8 @@ export type UtilisateurUncheckedCreateWithoutCotisationsInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1544,12 +1388,12 @@ export type UtilisateurUpdateWithoutCotisationsInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -1567,6 +1411,8 @@ export type UtilisateurUncheckedUpdateWithoutCotisationsInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1583,12 +1429,12 @@ export type UtilisateurCreateWithoutMouvementTotinesInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -1606,6 +1452,8 @@ export type UtilisateurUncheckedCreateWithoutMouvementTotinesInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1638,12 +1486,12 @@ export type UtilisateurUpdateWithoutMouvementTotinesInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -1661,6 +1509,8 @@ export type UtilisateurUncheckedUpdateWithoutMouvementTotinesInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1677,12 +1527,12 @@ export type UtilisateurCreateWithoutClientSoldesInput = {
   nom: string
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   societe?: Prisma.SocieteCreateNestedOneWithoutUtilisateursInput
   agence?: Prisma.AgenceCreateNestedOneWithoutUtilisateursInput
-  agenceCaissier?: Prisma.AgenceCreateNestedOneWithoutCaissiersInput
-  agenceCollecteur?: Prisma.AgenceCreateNestedOneWithoutCollecteursInput
   mouvements?: Prisma.MouvementItemCreateNestedManyWithoutCaissierInput
   createdMouvements?: Prisma.MouvementEpargneCreateNestedManyWithoutCreeParInput
   clientTotines?: Prisma.ClientTotineCreateNestedManyWithoutUtilisateursInput
@@ -1700,6 +1550,8 @@ export type UtilisateurUncheckedCreateWithoutClientSoldesInput = {
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   mouvements?: Prisma.MouvementItemUncheckedCreateNestedManyWithoutCaissierInput
@@ -1732,12 +1584,12 @@ export type UtilisateurUpdateWithoutClientSoldesInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -1755,6 +1607,8 @@ export type UtilisateurUncheckedUpdateWithoutClientSoldesInput = {
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1773,6 +1627,8 @@ export type UtilisateurCreateManySocieteInput = {
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
   agenceId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1783,11 +1639,11 @@ export type UtilisateurUpdateWithoutSocieteInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -1805,6 +1661,8 @@ export type UtilisateurUncheckedUpdateWithoutSocieteInput = {
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -1824,32 +1682,10 @@ export type UtilisateurUncheckedUpdateManyWithoutSocieteInput = {
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   agenceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UtilisateurCreateManyAgenceCaissierInput = {
-  id?: number
-  email: string
-  motDePasseHash: string
-  nom: string
-  telephone?: string | null
-  role?: $Enums.RoleUtilisateur
-  societeId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UtilisateurCreateManyAgenceCollecteurInput = {
-  id?: number
-  email: string
-  motDePasseHash: string
-  nom: string
-  telephone?: string | null
-  role?: $Enums.RoleUtilisateur
-  societeId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type UtilisateurCreateManyAgenceInput = {
@@ -1860,110 +1696,10 @@ export type UtilisateurCreateManyAgenceInput = {
   telephone?: string | null
   role?: $Enums.RoleUtilisateur
   societeId?: number | null
+  isActive?: boolean
+  lastLogin?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-}
-
-export type UtilisateurUpdateWithoutAgenceCaissierInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  motDePasseHash?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
-  agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
-  mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
-  createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
-  clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
-  carnets?: Prisma.CarnetUpdateManyWithoutUtilisateursNestedInput
-  cotisations?: Prisma.CotisationUpdateManyWithoutUtilisateursNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutUtilisateurNestedInput
-  clientSoldes?: Prisma.ClientSoldeUpdateManyWithoutUtilisateursNestedInput
-}
-
-export type UtilisateurUncheckedUpdateWithoutAgenceCaissierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  motDePasseHash?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
-  societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
-  createdMouvements?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutCreeParNestedInput
-  clientTotines?: Prisma.ClientTotineUncheckedUpdateManyWithoutUtilisateursNestedInput
-  carnets?: Prisma.CarnetUncheckedUpdateManyWithoutUtilisateursNestedInput
-  cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutUtilisateursNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutUtilisateurNestedInput
-  clientSoldes?: Prisma.ClientSoldeUncheckedUpdateManyWithoutUtilisateursNestedInput
-}
-
-export type UtilisateurUncheckedUpdateManyWithoutAgenceCaissierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  motDePasseHash?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
-  societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UtilisateurUpdateWithoutAgenceCollecteurInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  motDePasseHash?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
-  agence?: Prisma.AgenceUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
-  createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
-  clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
-  carnets?: Prisma.CarnetUpdateManyWithoutUtilisateursNestedInput
-  cotisations?: Prisma.CotisationUpdateManyWithoutUtilisateursNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutUtilisateurNestedInput
-  clientSoldes?: Prisma.ClientSoldeUpdateManyWithoutUtilisateursNestedInput
-}
-
-export type UtilisateurUncheckedUpdateWithoutAgenceCollecteurInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  motDePasseHash?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
-  societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
-  createdMouvements?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutCreeParNestedInput
-  clientTotines?: Prisma.ClientTotineUncheckedUpdateManyWithoutUtilisateursNestedInput
-  carnets?: Prisma.CarnetUncheckedUpdateManyWithoutUtilisateursNestedInput
-  cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutUtilisateursNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutUtilisateurNestedInput
-  clientSoldes?: Prisma.ClientSoldeUncheckedUpdateManyWithoutUtilisateursNestedInput
-}
-
-export type UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  motDePasseHash?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
-  societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UtilisateurUpdateWithoutAgenceInput = {
@@ -1972,11 +1708,11 @@ export type UtilisateurUpdateWithoutAgenceInput = {
   nom?: Prisma.StringFieldUpdateOperationsInput | string
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneWithoutUtilisateursNestedInput
-  agenceCaissier?: Prisma.AgenceUpdateOneWithoutCaissiersNestedInput
-  agenceCollecteur?: Prisma.AgenceUpdateOneWithoutCollecteursNestedInput
   mouvements?: Prisma.MouvementItemUpdateManyWithoutCaissierNestedInput
   createdMouvements?: Prisma.MouvementEpargneUpdateManyWithoutCreeParNestedInput
   clientTotines?: Prisma.ClientTotineUpdateManyWithoutUtilisateursNestedInput
@@ -1994,6 +1730,8 @@ export type UtilisateurUncheckedUpdateWithoutAgenceInput = {
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mouvements?: Prisma.MouvementItemUncheckedUpdateManyWithoutCaissierNestedInput
@@ -2013,6 +1751,8 @@ export type UtilisateurUncheckedUpdateManyWithoutAgenceInput = {
   telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
   societeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLogin?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2111,12 +1851,12 @@ export type UtilisateurSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   role?: boolean
   societeId?: boolean
   agenceId?: boolean
+  isActive?: boolean
+  lastLogin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   societe?: boolean | Prisma.Utilisateur$societeArgs<ExtArgs>
   agence?: boolean | Prisma.Utilisateur$agenceArgs<ExtArgs>
-  agenceCaissier?: boolean | Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>
-  agenceCollecteur?: boolean | Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>
   mouvements?: boolean | Prisma.Utilisateur$mouvementsArgs<ExtArgs>
   createdMouvements?: boolean | Prisma.Utilisateur$createdMouvementsArgs<ExtArgs>
   clientTotines?: boolean | Prisma.Utilisateur$clientTotinesArgs<ExtArgs>
@@ -2136,12 +1876,12 @@ export type UtilisateurSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   role?: boolean
   societeId?: boolean
   agenceId?: boolean
+  isActive?: boolean
+  lastLogin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   societe?: boolean | Prisma.Utilisateur$societeArgs<ExtArgs>
   agence?: boolean | Prisma.Utilisateur$agenceArgs<ExtArgs>
-  agenceCaissier?: boolean | Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>
-  agenceCollecteur?: boolean | Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>
 }, ExtArgs["result"]["utilisateur"]>
 
 export type UtilisateurSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2153,12 +1893,12 @@ export type UtilisateurSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   role?: boolean
   societeId?: boolean
   agenceId?: boolean
+  isActive?: boolean
+  lastLogin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   societe?: boolean | Prisma.Utilisateur$societeArgs<ExtArgs>
   agence?: boolean | Prisma.Utilisateur$agenceArgs<ExtArgs>
-  agenceCaissier?: boolean | Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>
-  agenceCollecteur?: boolean | Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>
 }, ExtArgs["result"]["utilisateur"]>
 
 export type UtilisateurSelectScalar = {
@@ -2170,16 +1910,16 @@ export type UtilisateurSelectScalar = {
   role?: boolean
   societeId?: boolean
   agenceId?: boolean
+  isActive?: boolean
+  lastLogin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UtilisateurOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "motDePasseHash" | "nom" | "telephone" | "role" | "societeId" | "agenceId" | "createdAt" | "updatedAt", ExtArgs["result"]["utilisateur"]>
+export type UtilisateurOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "motDePasseHash" | "nom" | "telephone" | "role" | "societeId" | "agenceId" | "isActive" | "lastLogin" | "createdAt" | "updatedAt", ExtArgs["result"]["utilisateur"]>
 export type UtilisateurInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   societe?: boolean | Prisma.Utilisateur$societeArgs<ExtArgs>
   agence?: boolean | Prisma.Utilisateur$agenceArgs<ExtArgs>
-  agenceCaissier?: boolean | Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>
-  agenceCollecteur?: boolean | Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>
   mouvements?: boolean | Prisma.Utilisateur$mouvementsArgs<ExtArgs>
   createdMouvements?: boolean | Prisma.Utilisateur$createdMouvementsArgs<ExtArgs>
   clientTotines?: boolean | Prisma.Utilisateur$clientTotinesArgs<ExtArgs>
@@ -2192,14 +1932,10 @@ export type UtilisateurInclude<ExtArgs extends runtime.Types.Extensions.Internal
 export type UtilisateurIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   societe?: boolean | Prisma.Utilisateur$societeArgs<ExtArgs>
   agence?: boolean | Prisma.Utilisateur$agenceArgs<ExtArgs>
-  agenceCaissier?: boolean | Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>
-  agenceCollecteur?: boolean | Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>
 }
 export type UtilisateurIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   societe?: boolean | Prisma.Utilisateur$societeArgs<ExtArgs>
   agence?: boolean | Prisma.Utilisateur$agenceArgs<ExtArgs>
-  agenceCaissier?: boolean | Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>
-  agenceCollecteur?: boolean | Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>
 }
 
 export type $UtilisateurPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2207,8 +1943,6 @@ export type $UtilisateurPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     societe: Prisma.$SocietePayload<ExtArgs> | null
     agence: Prisma.$AgencePayload<ExtArgs> | null
-    agenceCaissier: Prisma.$AgencePayload<ExtArgs> | null
-    agenceCollecteur: Prisma.$AgencePayload<ExtArgs> | null
     mouvements: Prisma.$MouvementItemPayload<ExtArgs>[]
     createdMouvements: Prisma.$MouvementEpargnePayload<ExtArgs>[]
     clientTotines: Prisma.$ClientTotinePayload<ExtArgs>[]
@@ -2226,6 +1960,8 @@ export type $UtilisateurPayload<ExtArgs extends runtime.Types.Extensions.Interna
     role: $Enums.RoleUtilisateur
     societeId: number | null
     agenceId: number | null
+    isActive: boolean
+    lastLogin: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["utilisateur"]>
@@ -2624,8 +2360,6 @@ export interface Prisma__UtilisateurClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   societe<T extends Prisma.Utilisateur$societeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$societeArgs<ExtArgs>>): Prisma.Prisma__SocieteClient<runtime.Types.Result.GetResult<Prisma.$SocietePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   agence<T extends Prisma.Utilisateur$agenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$agenceArgs<ExtArgs>>): Prisma.Prisma__AgenceClient<runtime.Types.Result.GetResult<Prisma.$AgencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  agenceCaissier<T extends Prisma.Utilisateur$agenceCaissierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$agenceCaissierArgs<ExtArgs>>): Prisma.Prisma__AgenceClient<runtime.Types.Result.GetResult<Prisma.$AgencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  agenceCollecteur<T extends Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$agenceCollecteurArgs<ExtArgs>>): Prisma.Prisma__AgenceClient<runtime.Types.Result.GetResult<Prisma.$AgencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   mouvements<T extends Prisma.Utilisateur$mouvementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$mouvementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdMouvements<T extends Prisma.Utilisateur$createdMouvementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$createdMouvementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementEpargnePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clientTotines<T extends Prisma.Utilisateur$clientTotinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$clientTotinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientTotinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2670,6 +2404,8 @@ export interface UtilisateurFieldRefs {
   readonly role: Prisma.FieldRef<"Utilisateur", 'RoleUtilisateur'>
   readonly societeId: Prisma.FieldRef<"Utilisateur", 'Int'>
   readonly agenceId: Prisma.FieldRef<"Utilisateur", 'Int'>
+  readonly isActive: Prisma.FieldRef<"Utilisateur", 'Boolean'>
+  readonly lastLogin: Prisma.FieldRef<"Utilisateur", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Utilisateur", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Utilisateur", 'DateTime'>
 }
@@ -3095,44 +2831,6 @@ export type Utilisateur$societeArgs<ExtArgs extends runtime.Types.Extensions.Int
  * Utilisateur.agence
  */
 export type Utilisateur$agenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Agence
-   */
-  select?: Prisma.AgenceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Agence
-   */
-  omit?: Prisma.AgenceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AgenceInclude<ExtArgs> | null
-  where?: Prisma.AgenceWhereInput
-}
-
-/**
- * Utilisateur.agenceCaissier
- */
-export type Utilisateur$agenceCaissierArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Agence
-   */
-  select?: Prisma.AgenceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Agence
-   */
-  omit?: Prisma.AgenceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AgenceInclude<ExtArgs> | null
-  where?: Prisma.AgenceWhereInput
-}
-
-/**
- * Utilisateur.agenceCollecteur
- */
-export type Utilisateur$agenceCollecteurArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Agence
    */

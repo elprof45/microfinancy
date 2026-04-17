@@ -11,11 +11,17 @@ import clientSoldes from './client-soldes/client-soldes'
 import comptes from './comptes/comptes'
 import mouvementEpargnes from './mouvement-epargnes/mouvement-epargnes'
 import mouvementItems from './mouvement-items/mouvement-items'
+import authRouter from './auth/auth_router'
+import workflowRouter from './workflows/workflows_router'
+import bulkRouter from './bulk/bulk_router'
+import reportsRouter from './reports/reports_router'
 import { logger } from 'hono/logger'
 import { readFile } from 'fs/promises'
 import { extname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { createErrorResponse } from './types/api'
+import { authMiddleware } from './middleware/auth'
+import { formatErrorResponse } from './lib/errors'
 
 const app = new Hono()
 app.use(logger())
@@ -70,6 +76,34 @@ app.get('/app/:file', async (c) => {
 })
 
 // API routes
+// Health check endpoint (public)
+app.get('/health', (c) => {
+  return c.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0',
+  })
+})
+
+// Auth routes (public)
+app.route('/auth', authRouter)
+
+// Protected routes (require authentication)
+app.use('/users', authMiddleware)
+app.use('/societies', authMiddleware)
+app.use('/agences', authMiddleware)
+app.use('/client-totines', authMiddleware)
+app.use('/carnets', authMiddleware)
+app.use('/cotisations', authMiddleware)
+app.use('/mouvement-totines', authMiddleware)
+app.use('/client-soldes', authMiddleware)
+app.use('/comptes', authMiddleware)
+app.use('/mouvement-epargnes', authMiddleware)
+app.use('/mouvement-items', authMiddleware)
+app.use('/workflows', authMiddleware)
+app.use('/bulk', authMiddleware)
+app.use('/reports', authMiddleware)
+
 app.route('/users', users)
 app.route('/societies', societies)
 app.route('/agences', agences)
@@ -81,6 +115,9 @@ app.route('/client-soldes', clientSoldes)
 app.route('/comptes', comptes)
 app.route('/mouvement-epargnes', mouvementEpargnes)
 app.route('/mouvement-items', mouvementItems)
+app.route('/workflows', workflowRouter)
+app.route('/bulk', bulkRouter)
+app.route('/reports', reportsRouter)
 
 // Error handling middleware
 app.onError((err, c) => {
@@ -101,8 +138,21 @@ app.onError((err, c) => {
 
   // Fallback error
   const isDev = process.env.NODE_ENV === 'development'
-  const message = isDev ? (err as Error).message : 'Internal server error'
-  return c.json(createErrorResponse(message, 500), 500)
+  const errorResponse = formatErrorResponse(err)
+  const statusCode = errorResponse.statusCode
+  const message = isDev ? errorResponse.error : 'Internal server error'
+  
+  console.error('[Error]', {
+    timestamp: new Date().toISOString(),
+    statusCode,
+    message,
+    error: isDev ? err : undefined,
+  })
+  
+  return c.json(
+    { ...createErrorResponse(message, statusCode) },
+    statusCode
+  )
 })
 
 // 404 handler

@@ -181,3 +181,22 @@ export function formatFormData(
 
   return formatted
 }
+
+/**
+ * Map backend validation errors to form field errors
+ * Backend returns: { details: [{ field: "email", code: "INVALID_EMAIL", message: "..." }] }
+ * Frontend needs: { email: "Invalid email format" }
+ */
+export function mapBackendErrors(details: Array<{ field: string; code: string; message: string }>): Record<string, string> {
+  const errors: Record<string, string> = {}
+
+  if (!Array.isArray(details)) {
+    return errors
+  }
+
+  details.forEach((error) => {
+    errors[error.field] = error.message || `Erreur: ${error.code}`
+  })
+
+  return errors
+}

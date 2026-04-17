@@ -186,8 +186,13 @@ export const entityKeys = Object.keys(entityConfigs) as EntityKey[]
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3030'
 
+/**
+ * Main API request function with automatic token injection from cookies
+ * Handles 401 responses with auto-logout
+ */
 async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
+    credentials: 'include', // Include cookies (httpOnly tokens)
     headers: {
       'Content-Type': 'application/json',
       ...options.headers,
@@ -196,9 +201,24 @@ async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T
   })
 
   const text = await response.text()
-  const payload = text ? JSON.parse(text) : null
+  let payload: any = null
+  
+  try {
+    payload = text ? JSON.parse(text) : null
+  } catch (e) {
+    payload = { error: text }
+  }
 
   if (!response.ok) {
+    // Handle 401 Unauthorized - likely expired token
+    if (response.status === 401) {
+      // Clear session and redirect to login (handled by client-side listener)
+      const message = payload?.error || 'Unauthorized - please login again'
+      const error: any = new Error(message)
+      error.status = 401
+      throw error
+    }
+
     const message = payload?.error || payload?.message || response.statusText
     const error: any = new Error(message)
     error.status = response.status
@@ -210,6 +230,45 @@ async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T
 }
 
 export const api = {
+  // Authentication methods
+  auth: {
+    async login(email: string, password: string) {
+      return apiRequest<any>('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+      })
+    },
+    async register(email: string, password: string, nom: string, role: string) {
+      return apiRequest<any>('/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({ email, password, nom, role }),
+      })
+    },
+    async logout() {
+      return apiRequest<any>('/auth/logout', {
+        method: 'POST',
+      })
+    },
+    async refresh() {
+      return apiRequest<any>('/auth/refresh', {
+        method: 'POST',
+      })
+    },
+    async passwordReset(email: string) {
+      return apiRequest<any>('/auth/password-reset', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+      })
+    },
+    async passwordResetConfirm(token: string, newPassword: string) {
+      return apiRequest<any>('/auth/password-reset/confirm', {
+        method: 'POST',
+        body: JSON.stringify({ token, newPassword }),
+      })
+    },
+  },
+
+  // Entity CRUD methods
   list(entity: EntityKey) {
     return apiRequest<any[]>(`/${entityConfigs[entity].apiPath}`)
   },

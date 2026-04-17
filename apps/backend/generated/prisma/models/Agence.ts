@@ -273,12 +273,10 @@ export type AgenceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
   societe?: Prisma.XOR<Prisma.SocieteScalarRelationFilter, Prisma.SocieteWhereInput>
-  caissiers?: Prisma.UtilisateurListRelationFilter
-  collecteurs?: Prisma.UtilisateurListRelationFilter
+  utilisateurs?: Prisma.UtilisateurListRelationFilter
   clients?: Prisma.ClientTotineListRelationFilter
   comptes?: Prisma.CompteListRelationFilter
   mouvementsEpargne?: Prisma.MouvementEpargneListRelationFilter
-  utilisateurs?: Prisma.UtilisateurListRelationFilter
   cotisations?: Prisma.CotisationListRelationFilter
   mouvementTotines?: Prisma.MouvementTotineListRelationFilter
 }
@@ -296,12 +294,10 @@ export type AgenceOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   societe?: Prisma.SocieteOrderByWithRelationInput
-  caissiers?: Prisma.UtilisateurOrderByRelationAggregateInput
-  collecteurs?: Prisma.UtilisateurOrderByRelationAggregateInput
+  utilisateurs?: Prisma.UtilisateurOrderByRelationAggregateInput
   clients?: Prisma.ClientTotineOrderByRelationAggregateInput
   comptes?: Prisma.CompteOrderByRelationAggregateInput
   mouvementsEpargne?: Prisma.MouvementEpargneOrderByRelationAggregateInput
-  utilisateurs?: Prisma.UtilisateurOrderByRelationAggregateInput
   cotisations?: Prisma.CotisationOrderByRelationAggregateInput
   mouvementTotines?: Prisma.MouvementTotineOrderByRelationAggregateInput
 }
@@ -322,12 +318,10 @@ export type AgenceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
   societe?: Prisma.XOR<Prisma.SocieteScalarRelationFilter, Prisma.SocieteWhereInput>
-  caissiers?: Prisma.UtilisateurListRelationFilter
-  collecteurs?: Prisma.UtilisateurListRelationFilter
+  utilisateurs?: Prisma.UtilisateurListRelationFilter
   clients?: Prisma.ClientTotineListRelationFilter
   comptes?: Prisma.CompteListRelationFilter
   mouvementsEpargne?: Prisma.MouvementEpargneListRelationFilter
-  utilisateurs?: Prisma.UtilisateurListRelationFilter
   cotisations?: Prisma.CotisationListRelationFilter
   mouvementTotines?: Prisma.MouvementTotineListRelationFilter
 }, "id" | "code">
@@ -379,12 +373,10 @@ export type AgenceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
 }
@@ -401,12 +393,10 @@ export type AgenceUncheckedCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
 }
@@ -422,12 +412,10 @@ export type AgenceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
 }
@@ -444,12 +432,10 @@ export type AgenceUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
@@ -624,18 +610,6 @@ export type AgenceCreateNestedOneWithoutUtilisateursInput = {
   connect?: Prisma.AgenceWhereUniqueInput
 }
 
-export type AgenceCreateNestedOneWithoutCaissiersInput = {
-  create?: Prisma.XOR<Prisma.AgenceCreateWithoutCaissiersInput, Prisma.AgenceUncheckedCreateWithoutCaissiersInput>
-  connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutCaissiersInput
-  connect?: Prisma.AgenceWhereUniqueInput
-}
-
-export type AgenceCreateNestedOneWithoutCollecteursInput = {
-  create?: Prisma.XOR<Prisma.AgenceCreateWithoutCollecteursInput, Prisma.AgenceUncheckedCreateWithoutCollecteursInput>
-  connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutCollecteursInput
-  connect?: Prisma.AgenceWhereUniqueInput
-}
-
 export type AgenceUpdateOneWithoutUtilisateursNestedInput = {
   create?: Prisma.XOR<Prisma.AgenceCreateWithoutUtilisateursInput, Prisma.AgenceUncheckedCreateWithoutUtilisateursInput>
   connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutUtilisateursInput
@@ -644,26 +618,6 @@ export type AgenceUpdateOneWithoutUtilisateursNestedInput = {
   delete?: Prisma.AgenceWhereInput | boolean
   connect?: Prisma.AgenceWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AgenceUpdateToOneWithWhereWithoutUtilisateursInput, Prisma.AgenceUpdateWithoutUtilisateursInput>, Prisma.AgenceUncheckedUpdateWithoutUtilisateursInput>
-}
-
-export type AgenceUpdateOneWithoutCaissiersNestedInput = {
-  create?: Prisma.XOR<Prisma.AgenceCreateWithoutCaissiersInput, Prisma.AgenceUncheckedCreateWithoutCaissiersInput>
-  connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutCaissiersInput
-  upsert?: Prisma.AgenceUpsertWithoutCaissiersInput
-  disconnect?: Prisma.AgenceWhereInput | boolean
-  delete?: Prisma.AgenceWhereInput | boolean
-  connect?: Prisma.AgenceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AgenceUpdateToOneWithWhereWithoutCaissiersInput, Prisma.AgenceUpdateWithoutCaissiersInput>, Prisma.AgenceUncheckedUpdateWithoutCaissiersInput>
-}
-
-export type AgenceUpdateOneWithoutCollecteursNestedInput = {
-  create?: Prisma.XOR<Prisma.AgenceCreateWithoutCollecteursInput, Prisma.AgenceUncheckedCreateWithoutCollecteursInput>
-  connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutCollecteursInput
-  upsert?: Prisma.AgenceUpsertWithoutCollecteursInput
-  disconnect?: Prisma.AgenceWhereInput | boolean
-  delete?: Prisma.AgenceWhereInput | boolean
-  connect?: Prisma.AgenceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AgenceUpdateToOneWithWhereWithoutCollecteursInput, Prisma.AgenceUpdateWithoutCollecteursInput>, Prisma.AgenceUncheckedUpdateWithoutCollecteursInput>
 }
 
 export type AgenceCreateNestedOneWithoutComptesInput = {
@@ -748,12 +702,10 @@ export type AgenceCreateWithoutSocieteInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
 }
@@ -769,12 +721,10 @@ export type AgenceUncheckedCreateWithoutSocieteInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
 }
@@ -833,8 +783,6 @@ export type AgenceCreateWithoutUtilisateursInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
@@ -854,8 +802,6 @@ export type AgenceUncheckedCreateWithoutUtilisateursInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
@@ -866,98 +812,6 @@ export type AgenceUncheckedCreateWithoutUtilisateursInput = {
 export type AgenceCreateOrConnectWithoutUtilisateursInput = {
   where: Prisma.AgenceWhereUniqueInput
   create: Prisma.XOR<Prisma.AgenceCreateWithoutUtilisateursInput, Prisma.AgenceUncheckedCreateWithoutUtilisateursInput>
-}
-
-export type AgenceCreateWithoutCaissiersInput = {
-  code: string
-  nom: string
-  adresse?: string | null
-  telephone?: string | null
-  zoneId?: number | null
-  isActive?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
-  clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
-  comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
-  mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
-  cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
-  mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
-}
-
-export type AgenceUncheckedCreateWithoutCaissiersInput = {
-  id?: number
-  code: string
-  nom: string
-  adresse?: string | null
-  telephone?: string | null
-  zoneId?: number | null
-  societeId: number
-  isActive?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
-  clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
-  comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
-  mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
-  cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
-}
-
-export type AgenceCreateOrConnectWithoutCaissiersInput = {
-  where: Prisma.AgenceWhereUniqueInput
-  create: Prisma.XOR<Prisma.AgenceCreateWithoutCaissiersInput, Prisma.AgenceUncheckedCreateWithoutCaissiersInput>
-}
-
-export type AgenceCreateWithoutCollecteursInput = {
-  code: string
-  nom: string
-  adresse?: string | null
-  telephone?: string | null
-  zoneId?: number | null
-  isActive?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
-  comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
-  mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
-  cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
-  mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
-}
-
-export type AgenceUncheckedCreateWithoutCollecteursInput = {
-  id?: number
-  code: string
-  nom: string
-  adresse?: string | null
-  telephone?: string | null
-  zoneId?: number | null
-  societeId: number
-  isActive?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
-  comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
-  mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
-  cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
-}
-
-export type AgenceCreateOrConnectWithoutCollecteursInput = {
-  where: Prisma.AgenceWhereUniqueInput
-  create: Prisma.XOR<Prisma.AgenceCreateWithoutCollecteursInput, Prisma.AgenceUncheckedCreateWithoutCollecteursInput>
 }
 
 export type AgenceUpsertWithoutUtilisateursInput = {
@@ -982,8 +836,6 @@ export type AgenceUpdateWithoutUtilisateursInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
@@ -1003,115 +855,9 @@ export type AgenceUncheckedUpdateWithoutUtilisateursInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
-}
-
-export type AgenceUpsertWithoutCaissiersInput = {
-  update: Prisma.XOR<Prisma.AgenceUpdateWithoutCaissiersInput, Prisma.AgenceUncheckedUpdateWithoutCaissiersInput>
-  create: Prisma.XOR<Prisma.AgenceCreateWithoutCaissiersInput, Prisma.AgenceUncheckedCreateWithoutCaissiersInput>
-  where?: Prisma.AgenceWhereInput
-}
-
-export type AgenceUpdateToOneWithWhereWithoutCaissiersInput = {
-  where?: Prisma.AgenceWhereInput
-  data: Prisma.XOR<Prisma.AgenceUpdateWithoutCaissiersInput, Prisma.AgenceUncheckedUpdateWithoutCaissiersInput>
-}
-
-export type AgenceUpdateWithoutCaissiersInput = {
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  zoneId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
-  clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
-  comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
-  mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
-  cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
-}
-
-export type AgenceUncheckedUpdateWithoutCaissiersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  zoneId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  societeId?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
-  clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
-  comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
-  mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
-  cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
-}
-
-export type AgenceUpsertWithoutCollecteursInput = {
-  update: Prisma.XOR<Prisma.AgenceUpdateWithoutCollecteursInput, Prisma.AgenceUncheckedUpdateWithoutCollecteursInput>
-  create: Prisma.XOR<Prisma.AgenceCreateWithoutCollecteursInput, Prisma.AgenceUncheckedCreateWithoutCollecteursInput>
-  where?: Prisma.AgenceWhereInput
-}
-
-export type AgenceUpdateToOneWithWhereWithoutCollecteursInput = {
-  where?: Prisma.AgenceWhereInput
-  data: Prisma.XOR<Prisma.AgenceUpdateWithoutCollecteursInput, Prisma.AgenceUncheckedUpdateWithoutCollecteursInput>
-}
-
-export type AgenceUpdateWithoutCollecteursInput = {
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  zoneId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
-  comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
-  mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
-  cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
-  mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
-}
-
-export type AgenceUncheckedUpdateWithoutCollecteursInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  nom?: Prisma.StringFieldUpdateOperationsInput | string
-  adresse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telephone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  zoneId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  societeId?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
-  comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
-  mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
@@ -1127,11 +873,9 @@ export type AgenceCreateWithoutComptesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
 }
@@ -1148,11 +892,9 @@ export type AgenceUncheckedCreateWithoutComptesInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
 }
@@ -1184,11 +926,9 @@ export type AgenceUpdateWithoutComptesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
 }
@@ -1205,11 +945,9 @@ export type AgenceUncheckedUpdateWithoutComptesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
@@ -1225,11 +963,9 @@ export type AgenceCreateWithoutMouvementsEpargneInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
 }
@@ -1246,11 +982,9 @@ export type AgenceUncheckedCreateWithoutMouvementsEpargneInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
 }
@@ -1282,11 +1016,9 @@ export type AgenceUpdateWithoutMouvementsEpargneInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
 }
@@ -1303,11 +1035,9 @@ export type AgenceUncheckedUpdateWithoutMouvementsEpargneInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
@@ -1323,11 +1053,9 @@ export type AgenceCreateWithoutClientsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
 }
@@ -1344,11 +1072,9 @@ export type AgenceUncheckedCreateWithoutClientsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
 }
@@ -1380,11 +1106,9 @@ export type AgenceUpdateWithoutClientsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
 }
@@ -1401,11 +1125,9 @@ export type AgenceUncheckedUpdateWithoutClientsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
@@ -1421,12 +1143,10 @@ export type AgenceCreateWithoutCotisationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineCreateNestedManyWithoutAgenceInput
 }
 
@@ -1442,12 +1162,10 @@ export type AgenceUncheckedCreateWithoutCotisationsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedCreateNestedManyWithoutAgenceInput
 }
 
@@ -1478,12 +1196,10 @@ export type AgenceUpdateWithoutCotisationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
 }
 
@@ -1499,12 +1215,10 @@ export type AgenceUncheckedUpdateWithoutCotisationsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
 
@@ -1519,12 +1233,10 @@ export type AgenceCreateWithoutMouvementTotinesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   societe: Prisma.SocieteCreateNestedOneWithoutAgencesInput
-  caissiers?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationCreateNestedManyWithoutAgenceInput
 }
 
@@ -1540,12 +1252,10 @@ export type AgenceUncheckedCreateWithoutMouvementTotinesInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  caissiers?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCaissierInput
-  collecteurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceCollecteurInput
+  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   clients?: Prisma.ClientTotineUncheckedCreateNestedManyWithoutAgenceInput
   comptes?: Prisma.CompteUncheckedCreateNestedManyWithoutAgenceInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedCreateNestedManyWithoutAgenceInput
-  utilisateurs?: Prisma.UtilisateurUncheckedCreateNestedManyWithoutAgenceInput
   cotisations?: Prisma.CotisationUncheckedCreateNestedManyWithoutAgenceInput
 }
 
@@ -1576,12 +1286,10 @@ export type AgenceUpdateWithoutMouvementTotinesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   societe?: Prisma.SocieteUpdateOneRequiredWithoutAgencesNestedInput
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
 }
 
@@ -1597,12 +1305,10 @@ export type AgenceUncheckedUpdateWithoutMouvementTotinesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
 }
 
@@ -1629,12 +1335,10 @@ export type AgenceUpdateWithoutSocieteInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUpdateManyWithoutAgenceNestedInput
 }
@@ -1650,12 +1354,10 @@ export type AgenceUncheckedUpdateWithoutSocieteInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  caissiers?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCaissierNestedInput
-  collecteurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceCollecteurNestedInput
+  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   clients?: Prisma.ClientTotineUncheckedUpdateManyWithoutAgenceNestedInput
   comptes?: Prisma.CompteUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementsEpargne?: Prisma.MouvementEpargneUncheckedUpdateManyWithoutAgenceNestedInput
-  utilisateurs?: Prisma.UtilisateurUncheckedUpdateManyWithoutAgenceNestedInput
   cotisations?: Prisma.CotisationUncheckedUpdateManyWithoutAgenceNestedInput
   mouvementTotines?: Prisma.MouvementTotineUncheckedUpdateManyWithoutAgenceNestedInput
 }
@@ -1679,23 +1381,19 @@ export type AgenceUncheckedUpdateManyWithoutSocieteInput = {
  */
 
 export type AgenceCountOutputType = {
-  caissiers: number
-  collecteurs: number
+  utilisateurs: number
   clients: number
   comptes: number
   mouvementsEpargne: number
-  utilisateurs: number
   cotisations: number
   mouvementTotines: number
 }
 
 export type AgenceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  caissiers?: boolean | AgenceCountOutputTypeCountCaissiersArgs
-  collecteurs?: boolean | AgenceCountOutputTypeCountCollecteursArgs
+  utilisateurs?: boolean | AgenceCountOutputTypeCountUtilisateursArgs
   clients?: boolean | AgenceCountOutputTypeCountClientsArgs
   comptes?: boolean | AgenceCountOutputTypeCountComptesArgs
   mouvementsEpargne?: boolean | AgenceCountOutputTypeCountMouvementsEpargneArgs
-  utilisateurs?: boolean | AgenceCountOutputTypeCountUtilisateursArgs
   cotisations?: boolean | AgenceCountOutputTypeCountCotisationsArgs
   mouvementTotines?: boolean | AgenceCountOutputTypeCountMouvementTotinesArgs
 }
@@ -1713,14 +1411,7 @@ export type AgenceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * AgenceCountOutputType without action
  */
-export type AgenceCountOutputTypeCountCaissiersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UtilisateurWhereInput
-}
-
-/**
- * AgenceCountOutputType without action
- */
-export type AgenceCountOutputTypeCountCollecteursArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AgenceCountOutputTypeCountUtilisateursArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UtilisateurWhereInput
 }
 
@@ -1743,13 +1434,6 @@ export type AgenceCountOutputTypeCountComptesArgs<ExtArgs extends runtime.Types.
  */
 export type AgenceCountOutputTypeCountMouvementsEpargneArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MouvementEpargneWhereInput
-}
-
-/**
- * AgenceCountOutputType without action
- */
-export type AgenceCountOutputTypeCountUtilisateursArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UtilisateurWhereInput
 }
 
 /**
@@ -1780,12 +1464,10 @@ export type AgenceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   societe?: boolean | Prisma.SocieteDefaultArgs<ExtArgs>
-  caissiers?: boolean | Prisma.Agence$caissiersArgs<ExtArgs>
-  collecteurs?: boolean | Prisma.Agence$collecteursArgs<ExtArgs>
+  utilisateurs?: boolean | Prisma.Agence$utilisateursArgs<ExtArgs>
   clients?: boolean | Prisma.Agence$clientsArgs<ExtArgs>
   comptes?: boolean | Prisma.Agence$comptesArgs<ExtArgs>
   mouvementsEpargne?: boolean | Prisma.Agence$mouvementsEpargneArgs<ExtArgs>
-  utilisateurs?: boolean | Prisma.Agence$utilisateursArgs<ExtArgs>
   cotisations?: boolean | Prisma.Agence$cotisationsArgs<ExtArgs>
   mouvementTotines?: boolean | Prisma.Agence$mouvementTotinesArgs<ExtArgs>
   _count?: boolean | Prisma.AgenceCountOutputTypeDefaultArgs<ExtArgs>
@@ -1838,12 +1520,10 @@ export type AgenceSelectScalar = {
 export type AgenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "nom" | "adresse" | "telephone" | "zoneId" | "societeId" | "isActive" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["agence"]>
 export type AgenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   societe?: boolean | Prisma.SocieteDefaultArgs<ExtArgs>
-  caissiers?: boolean | Prisma.Agence$caissiersArgs<ExtArgs>
-  collecteurs?: boolean | Prisma.Agence$collecteursArgs<ExtArgs>
+  utilisateurs?: boolean | Prisma.Agence$utilisateursArgs<ExtArgs>
   clients?: boolean | Prisma.Agence$clientsArgs<ExtArgs>
   comptes?: boolean | Prisma.Agence$comptesArgs<ExtArgs>
   mouvementsEpargne?: boolean | Prisma.Agence$mouvementsEpargneArgs<ExtArgs>
-  utilisateurs?: boolean | Prisma.Agence$utilisateursArgs<ExtArgs>
   cotisations?: boolean | Prisma.Agence$cotisationsArgs<ExtArgs>
   mouvementTotines?: boolean | Prisma.Agence$mouvementTotinesArgs<ExtArgs>
   _count?: boolean | Prisma.AgenceCountOutputTypeDefaultArgs<ExtArgs>
@@ -1859,12 +1539,10 @@ export type $AgencePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Agence"
   objects: {
     societe: Prisma.$SocietePayload<ExtArgs>
-    caissiers: Prisma.$UtilisateurPayload<ExtArgs>[]
-    collecteurs: Prisma.$UtilisateurPayload<ExtArgs>[]
+    utilisateurs: Prisma.$UtilisateurPayload<ExtArgs>[]
     clients: Prisma.$ClientTotinePayload<ExtArgs>[]
     comptes: Prisma.$ComptePayload<ExtArgs>[]
     mouvementsEpargne: Prisma.$MouvementEpargnePayload<ExtArgs>[]
-    utilisateurs: Prisma.$UtilisateurPayload<ExtArgs>[]
     cotisations: Prisma.$CotisationPayload<ExtArgs>[]
     mouvementTotines: Prisma.$MouvementTotinePayload<ExtArgs>[]
   }
@@ -2275,12 +1953,10 @@ readonly fields: AgenceFieldRefs;
 export interface Prisma__AgenceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   societe<T extends Prisma.SocieteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SocieteDefaultArgs<ExtArgs>>): Prisma.Prisma__SocieteClient<runtime.Types.Result.GetResult<Prisma.$SocietePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  caissiers<T extends Prisma.Agence$caissiersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$caissiersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  collecteurs<T extends Prisma.Agence$collecteursArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$collecteursArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  utilisateurs<T extends Prisma.Agence$utilisateursArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$utilisateursArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clients<T extends Prisma.Agence$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientTotinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comptes<T extends Prisma.Agence$comptesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$comptesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ComptePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mouvementsEpargne<T extends Prisma.Agence$mouvementsEpargneArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$mouvementsEpargneArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementEpargnePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  utilisateurs<T extends Prisma.Agence$utilisateursArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$utilisateursArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cotisations<T extends Prisma.Agence$cotisationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$cotisationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CotisationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mouvementTotines<T extends Prisma.Agence$mouvementTotinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$mouvementTotinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MouvementTotinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2724,33 +2400,9 @@ export type AgenceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Agence.caissiers
+ * Agence.utilisateurs
  */
-export type Agence$caissiersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Utilisateur
-   */
-  select?: Prisma.UtilisateurSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Utilisateur
-   */
-  omit?: Prisma.UtilisateurOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UtilisateurInclude<ExtArgs> | null
-  where?: Prisma.UtilisateurWhereInput
-  orderBy?: Prisma.UtilisateurOrderByWithRelationInput | Prisma.UtilisateurOrderByWithRelationInput[]
-  cursor?: Prisma.UtilisateurWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UtilisateurScalarFieldEnum | Prisma.UtilisateurScalarFieldEnum[]
-}
-
-/**
- * Agence.collecteurs
- */
-export type Agence$collecteursArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Agence$utilisateursArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Utilisateur
    */
@@ -2841,30 +2493,6 @@ export type Agence$mouvementsEpargneArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.MouvementEpargneScalarFieldEnum | Prisma.MouvementEpargneScalarFieldEnum[]
-}
-
-/**
- * Agence.utilisateurs
- */
-export type Agence$utilisateursArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Utilisateur
-   */
-  select?: Prisma.UtilisateurSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Utilisateur
-   */
-  omit?: Prisma.UtilisateurOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UtilisateurInclude<ExtArgs> | null
-  where?: Prisma.UtilisateurWhereInput
-  orderBy?: Prisma.UtilisateurOrderByWithRelationInput | Prisma.UtilisateurOrderByWithRelationInput[]
-  cursor?: Prisma.UtilisateurWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UtilisateurScalarFieldEnum | Prisma.UtilisateurScalarFieldEnum[]
 }
 
 /**
