@@ -6,6 +6,9 @@ import { useAuth } from '@/lib/auth-context'
 import { api, entityConfigs, type EntityConfig, type EntityKey } from '@/lib/api'
 import { formatFormData, validateObject, validationSchemas, mapBackendErrors } from '@/lib/validation'
 import { AlertTriangle, Loader2, PlusCircle, Search, X } from 'lucide-react'
+import { useWorkflow } from '@/lib/use-workflow'
+import { WorkflowStatusBadge } from '@/components/workflow-status-badge'
+import { WorkflowModal } from '@/components/workflow-modal'
 
 function createEmptyForm(config: EntityConfig) {
   return config.fields.reduce<Record<string, unknown>>((form, field) => {
@@ -20,6 +23,7 @@ type EntityPageProps = {
 
 export default function EntityPage({ entitySlug }: EntityPageProps) {
   const { user } = useAuth()
+  const { getPermissions } = useWorkflow()
   const config = (entityConfigs as Record<string, EntityConfig>)[entitySlug]
   const [items, setItems] = useState<any[]>([])
   const [selected, setSelected] = useState<any | null>(null)
@@ -33,6 +37,11 @@ export default function EntityPage({ entitySlug }: EntityPageProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [totalItems, setTotalItems] = useState(0)
+
+  // Workflow modal state
+  const [workflowModalOpen, setWorkflowModalOpen] = useState(false)
+  const [selectedWorkflowItem, setSelectedWorkflowItem] = useState<any | null>(null)
+  const [workflowAction, setWorkflowAction] = useState<'approve' | 'reject' | 'cancel'>('approve')
   const itemsPerPage = 10
 
   const schema = validationSchemas[entitySlug] || {}
@@ -303,12 +312,65 @@ export default function EntityPage({ entitySlug }: EntityPageProps) {
                       ))}
                       <td className="px-4 py-3 text-slate-600">
                         <div className="flex flex-wrap gap-2">
-                          {canCreate && (
+                          {/* Workflow actions for mouvement-epargnes */}
+                          {entitySlug === 'mouvement-epargnes' && item.statut && (
+                            <>
+                              {['EN_ATTENTE', 'VALIDE', 'REJETE', 'ANNULE', 'REMBOURSE'].includes(item.statut) && (
+                                <WorkflowStatusBadge status={item.statut} size="sm" />
+                              )}
+                              {user?.role && ['ADMIN', 'CAISSIER'].includes(user.role) && (
+                                <>
+                                  {item.statut === 'EN_ATTENTE' && (
+                                    <>
+                                      <button
+                                        type="button"
+                                        className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700 hover:bg-green-200"
+                                        onClick={() => {
+                                          setSelectedWorkflowItem(item)
+                                          setWorkflowAction('approve')
+                                          setWorkflowModalOpen(true)
+                                        }}
+                                      >
+                                        Approve
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700 hover:bg-red-200"
+                                        onClick={() => {
+                                          setSelectedWorkflowItem(item)
+                                          setWorkflowAction('reject')
+                                          setWorkflowModalOpen(true)
+                                        }}
+                                      >
+                                        Reject
+                                      </button>
+                                    </>
+                                  )}
+                                  {item.statut === 'VALIDE' && user?.role === 'ADMIN' && (
+                                    <button
+                                      type="button"
+                                      className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700 hover:bg-gray-200"
+                                      onClick={() => {
+                                        setSelectedWorkflowItem(item)
+                                        setWorkflowAction('cancel')
+                                        setWorkflowModalOpen(true)
+                                      }}
+                                    >
+                                      Cancel
+                                    </button>
+                                  )}
+                                </>
+                              )}
+                            </>
+                          )}
+
+                          {/* Edit/Delete buttons */}
+                          {canCreate && entitySlug !== 'mouvement-epargnes' && (
                             <button type="button" className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-200" onClick={() => editItem(item)}>
                               Modifier
                             </button>
                           )}
-                          {canDelete && (
+                          {canDelete && !['mouvement-epargnes'].includes(entitySlug) && (
                             <button type="button" className="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-700 hover:bg-rose-200" onClick={() => handleDelete(item.id)}>
                               Supprimer
                             </button>

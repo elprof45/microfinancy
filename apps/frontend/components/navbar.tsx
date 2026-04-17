@@ -81,8 +81,11 @@ export function NavBar() {
               <Link className="rounded-full px-3 py-2 transition hover:bg-slate-100" href="/app/comptes">
                 Comptes
               </Link>
-              <Link className="rounded-full px-3 py-2 transition hover:bg-slate-100" href="/app/workflows">
-                Workflows
+              <Link
+                className="rounded-full px-3 py-2 transition hover:bg-slate-100 font-semibold text-amber-600"
+                href="/app/workflows"
+              >
+                ⏳ Approvals
               </Link>
             </>
           )}

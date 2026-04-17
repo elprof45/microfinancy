@@ -150,8 +150,7 @@ app.onError((err, c) => {
   })
   
   return c.json(
-    { ...createErrorResponse(message, statusCode) },
-    statusCode
+    { ...createErrorResponse(message, statusCode) }
   )
 })
 
